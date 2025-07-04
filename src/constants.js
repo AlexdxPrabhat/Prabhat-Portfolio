@@ -197,7 +197,7 @@ export const projects = [
       "A sleek and responsive weather prediction app that provides real-time weather details for any city worldwide. Features dynamic icons, fast data fetching, and a lightweight UI for a smooth user experience across all devices.",
     image: weatherApp,
     tags: ["JavaScript", "HTML", "CSS", "Firebase"],
-    github: "https://github.com/codingmastr/Task-Reminder-Tool",
+    github: "https://github.com/AlexdxPrabhat/WeatherApp",
     webapp: "https://weatherapp-e890e.web.app/",
   },
   {
