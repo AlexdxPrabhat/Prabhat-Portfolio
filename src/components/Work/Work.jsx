@@ -112,9 +112,15 @@ const Work = () => {
                     View Code
                   </a>
                   <a
-                    href={selectedProject.webapp}
+                    href={selectedProject.webapp || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (!selectedProject.webapp) {
+                        e.preventDefault(); // Stop the link
+                        alert("Live is Not Available");
+                      }
+                    }}
                     className="w-1/2 bg-purple-600 hover:bg-purple-800 text-white lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
                   >
                     View Live
