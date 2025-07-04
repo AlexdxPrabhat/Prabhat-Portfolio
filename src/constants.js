@@ -113,7 +113,7 @@ export const experiences = [
 export const education = [
   {
     id: 0,
-    img: graphicEraDeemed, 
+    img: graphicEraDeemed,
     school: "Graphic Era Deemed to be University, Dehradun",
     date: "April 2025 - March 2027",
     grade: "Not Declared",
@@ -122,10 +122,10 @@ export const education = [
   },
   {
     id: 1,
-    img: graphicEraHill, 
+    img: graphicEraHill,
     school: "Graphic Era Hill University, Dehradun",
     date: "Sept 2021 - Aug 2024",
-    grade: "7.54 CGPA", 
+    grade: "7.54 CGPA",
     desc: "I completed my Bachelor's degree (BCA) in Computer Applications from Graphic Era Hill University, Dehradun. During this program, I built a solid foundation in programming, data structures, algorithms, database systems, web development, and software engineering. I actively participated in coding competitions, technical events, and hands-on projects that helped me apply theoretical knowledge to practical challenges.",
     degree: "Bachelor of Computer Applications - BCA",
   },
@@ -167,7 +167,7 @@ export const projects = [
       "A modern paste management web app built with React.js and Tailwind CSS. Allows users to create, edit, view, delete, and search pastes with an intuitive interface. Features include real-time paste creation, timestamping, and easy copy/share functionality. Designed for speed, usability, and clean dark-mode aesthetics",
     image: pasteApp,
     tags: ["React JS", "React Router", "Redux", "Vercel", "TailwindCss"],
-    github: "https://github.com/codingmastr/Tarun-s-Portfolio",
+    github: "https://github.com/AlexdxPrabhat/Paste-App",
     webapp: "https://paste-app-woad-seven.vercel.app/",
   },
   {
