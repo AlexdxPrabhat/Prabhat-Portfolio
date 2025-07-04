@@ -118,7 +118,7 @@ const Work = () => {
                     onClick={(e) => {
                       if (!selectedProject.webapp) {
                         e.preventDefault(); // Stop the link
-                        alert("Live is Not Available");
+                        alert("Live is Not Available !Cmd tool");
                       }
                     }}
                     className="w-1/2 bg-purple-600 hover:bg-purple-800 text-white lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
