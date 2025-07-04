@@ -20,10 +20,4 @@ A sleek, responsive, and fully customizable **animated portfolio website** built
 - Easy to customize with Tailwind utility classes 🎯  
 - Professional sections: About, Skills, Projects, Contact, etc. 👨‍💻  
 
-## 🧑‍💻 How to Use
 
-### 1️⃣ Clone the Repo
-
-```bash
-git clone [your-repo-link]
-cd your-repo-name
