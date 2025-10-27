@@ -22,6 +22,7 @@ import vscodeLogo from "./assets/tech_logo/vscode.png";
 import postmanLogo from "./assets/tech_logo/postman.png";
 import mcLogo from "./assets/tech_logo/mc.png";
 import vercelLogo from "./assets/tech_logo/vercel.png";
+import chitChat from "./assets/work_logo/Chit-Chat";
 
 // Experience Section Logo's
 import accenture from "./assets/company_logo/accenture.png";
@@ -112,6 +113,7 @@ export const experiences = [
 ];
 
 export const education = [
+
   {
     id: 0,
     img: graphicEraDeemed,
@@ -151,6 +153,18 @@ export const education = [
 ];
 
 export const projects = [
+  {
+
+    id: 1,
+    title: "Chit Chat",
+    description:
+      "A real-time chat application built using the MERN stack (MongoDB, Express.js, React.js, and Node.js). It enables users to send and receive instant messages in one-on-one and group chats. Features include user authentication, real-time messaging powered by Socket.io, online/offline status indicators, and a clean, responsive UI with dark mode support. Designed for seamless communication and modern performance.",
+    image: chitChat,
+    tags: ["MERN Stack", "React JS", "Node JS", "Express", "MongoDB", "Socket.io", "Tailwind CSS"],
+    github: "https://github.com/AlexdxPrabhat/ChitChat",
+    webapp: "https://chitchat-mo73.onrender.com/",
+
+  },
   {
     id: 0,
     title: "PromptDeploy",
