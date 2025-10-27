@@ -22,7 +22,7 @@ import vscodeLogo from "./assets/tech_logo/vscode.png";
 import postmanLogo from "./assets/tech_logo/postman.png";
 import mcLogo from "./assets/tech_logo/mc.png";
 import vercelLogo from "./assets/tech_logo/vercel.png";
-import chitChat from "./assets/work_logo/Chit-Chat";
+import chitChat from "./assets/work_logo/Chit-Chat.png"
 
 // Experience Section Logo's
 import accenture from "./assets/company_logo/accenture.png";
@@ -40,7 +40,6 @@ import LeetCodeMetric from "./assets/work_logo/LeeetCodeMetric.png";
 import weatherApp from "./assets/work_logo/weatherApp.png";
 import studySync from "./assets/work_logo/studySync.png";
 import promptDeploy from "./assets/work_logo/promptDeploy.png";
-
 export const SkillsInfo = [
   {
     title: "Frontend",
