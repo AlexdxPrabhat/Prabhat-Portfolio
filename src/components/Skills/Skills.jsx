@@ -1,73 +1,81 @@
-// src/components/Skills/Skills.jsx
-import React from "react";
+import { useRef } from "react";
+import { useGSAP, revealUp, trackSpotlight } from "../../lib/motion";
 import { SkillsInfo } from "../../constants";
-import Tilt from "react-parallax-tilt";
+import SectionHeading from "../ui/SectionHeading";
 
-const Skills = () => (
-  <section
-    id="skills"
-    className="py-24 pb-24 px-[12vw] md:px-[7vw] lg:px-[20vw] font-sans bg-skills-gradient clip-path-custom"
-  >
-    {/* Section Title */}
-    <div className="text-center mb-8">
-      <h2 className="text-3xl sm:text-4xl font-bold text-white">SKILLS</h2>
-      <div className="w-24 h-1 bg-[#8245ec] mx-auto mt-2"></div>
-      <p className="text-gray-400 mt-4 text-lg font-semibold">
-      A collection of my technical skills and expertise honed through various projects and experiences
-      </p>
-    </div>
+// Bento placement on large screens (6-column grid), keyed by category title
+const span = {
+  ServiceNow: "lg:col-span-4",
+  "Mobile & Game Dev": "lg:col-span-2",
+  Frontend: "lg:col-span-2",
+  "Backend & Cloud": "lg:col-span-2",
+  Languages: "lg:col-span-2",
+  Tools: "lg:col-span-6",
+};
 
-    {/* Skill Categories */}
-    <div className="flex flex-wrap gap-1 lg:gap-5 py-10 justify-between">
-      {SkillsInfo.map((category) => (
-        <div
-          key={category.title}
-          className="bg-gray-900 backdrop-blur-md px-6 sm:px-10 py-8 sm:py-6 mb-10 w-full sm:w-[48%] rounded-2xl border border-white 
-          shadow-[0_0_20px_1px_rgba(130,69,236,0.3)]"
-        >
-          <h3 className="text-2xl sm:text-3xl font-semibold text-gray-400 mb-4 text-center">
-            {category.title}
-          </h3>
+const Skills = () => {
+  const root = useRef(null);
 
-          {/* Skill Items - 3 per row on larger screens */}
-          <Tilt
-            key={category.title}
-            tiltMaxAngleX={20}
-            tiltMaxAngleY={20}
-            perspective={1000}
-            scale={1.05}
-            transitionSpeed={1000}
-            gyroscope={true}
-          >
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full">
-              {category.skills.map((skill) => (
-                <div
-                  key={skill.name}
-                  className="flex items-center justify-center space-x-2 bg-transparent border-2 border-gray-700 rounded-3xl py-2 px-2 sm:py-2 sm:px-2 text-center"
-                >
-                  {skill.icon ? (
-                    <skill.icon
-                      aria-hidden="true"
-                      className="w-6 h-6 sm:w-8 sm:h-8 shrink-0 text-[#62d84e]"
-                    />
-                  ) : (
-                    <img
-                      src={skill.logo}
-                      alt={`${skill.name} logo`}
-                      className="w-6 h-6 sm:w-8 sm:h-8 shrink-0 object-contain"
-                    />
-                  )}
-                  <span className="text-xs sm:text-sm text-gray-300">
+  useGSAP(
+    () => {
+      revealUp(".sk-card", { trigger: ".sk-grid", stagger: 0.08, y: 50 });
+      document.querySelectorAll(".sk-card").forEach((card) => {
+        revealUp(card.querySelectorAll(".sk-pill"), { trigger: card, stagger: 0.03, y: 14, start: "top 95%" });
+      });
+    },
+    { scope: root }
+  );
+
+  return (
+    <section id="skills" ref={root} className="section">
+      <div className="container-x">
+        <SectionHeading
+          index={5}
+          label="Skills"
+          title={
+            <>
+              The <span className="font-serif font-normal italic text-lime">toolkit</span>
+            </>
+          }
+          aside="From enterprise platforms to native apps, game engines and edge runtimes."
+        />
+
+        <div className="sk-grid grid gap-4 md:grid-cols-2 lg:grid-cols-6">
+          {SkillsInfo.map((cat, i) => (
+            <div
+              key={cat.title}
+              onPointerMove={trackSpotlight}
+              className={`sk-card spotlight invisible rounded-3xl border border-line bg-surface/60 p-6 md:p-8 ${span[cat.title] || ""} ${
+                cat.title === "Tools" ? "md:col-span-2" : ""
+              }`}
+            >
+              <div className="flex items-baseline justify-between">
+                <h3 className="text-xl font-medium tracking-[-0.02em] md:text-2xl">{cat.title}</h3>
+                <span className="text-xs text-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+              </div>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {cat.skills.map((skill) => (
+                  <li
+                    key={skill.name}
+                    className="sk-pill invisible inline-flex items-center gap-2.5 rounded-full border border-line bg-ink/60 py-2 pl-2 pr-4 text-sm text-paper/85 transition-colors duration-300 hover:border-paper/30 hover:text-paper"
+                  >
+                    <span className="grid h-7 w-7 place-items-center rounded-full bg-paper/[0.06]">
+                      {skill.icon ? (
+                        <skill.icon aria-hidden="true" className="h-4 w-4 text-[#62d84e]" />
+                      ) : (
+                        <img src={skill.logo} alt="" className="h-4 w-4 object-contain" />
+                      )}
+                    </span>
                     {skill.name}
-                  </span>
-                </div>
-              ))}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </Tilt>
+          ))}
         </div>
-      ))}
-    </div>
-  </section>
-);
+      </div>
+    </section>
+  );
+};
 
 export default Skills;

@@ -1,24 +1,31 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      keyframes: {
-        blob: {
-          '0%': { transform: 'scale(1)' },
-          '33%': { transform: 'scale(1.2)' },
-          '66%': { transform: 'scale(0.8)' },
-          '100%': { transform: 'scale(1)' },
-        },
+      colors: {
+        ink: "#07070a",
+        surface: "#0f0e14",
+        raised: "#16151d",
+        paper: "#f1efe9",
+        muted: "#8f8d99",
+        dim: "#4a4954",
+        line: "rgba(241, 239, 233, 0.1)",
+        violet: { DEFAULT: "#8b5cf6", soft: "#a78bfa", deep: "#4c1d95" },
+        lime: "#c4f542",
       },
-      animation: {
-        blob: 'blob 10s infinite',
+      fontFamily: {
+        sans: ['"Inter Tight Variable"', "system-ui", "sans-serif"],
+        serif: ['"Instrument Serif"', "Georgia", "serif"],
       },
-      backgroundImage: {
-        'skills-gradient': 'linear-gradient(38.73deg, rgba(204, 0, 187, 0.15) 0%, rgba(201, 32, 184, 0) 50%), linear-gradient(141.27deg, rgba(0, 70, 209, 0) 50%, rgba(0, 70, 209, 0.15) 100%)',
+      letterSpacing: {
+        tightest: "-0.06em",
+      },
+      transitionTimingFunction: {
+        expo: "cubic-bezier(0.19, 1, 0.22, 1)",
+      },
+      screens: {
+        xs: "420px",
       },
     },
   },
