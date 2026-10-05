@@ -24,7 +24,11 @@ const About = () => {
           <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 text-[#8245ec] leading-tight">
             <span className="text-white">I am a </span>
             <ReactTypingEffect
-              text={["Fullstack Developer", "Coder"]}
+              text={[
+                "ServiceNow Developer",
+                "Full-Stack Developer",
+                "Mobile App Developer",
+              ]}
               speed={200}
               eraseSpeed={50}
               typingDelay={500}
@@ -36,12 +40,13 @@ const About = () => {
           </h3>
           {/* About Me Paragraph */}
           <p className="text-base sm:text-lg md:text-lg text-gray-400 mb-10 mt-8 leading-relaxed">
-            I’m Prabhat Bisht, a passionate Full-Stack Developer skilled in the
-            MERN stack, Tailwind CSS, and modern web technologies. Currently at
-            Accenture, I’ve gained experience working on large-scale systems
-            while building my expertise in full-stack development through
-            self-driven projects. I’m focused on contributing as a developer and
-            creating impactful solutions.
+            I’m Prabhat Bisht, a ServiceNow Developer and Certified System
+            Administrator (CSA) at Accenture, where I build ITSM and CMDB
+            solutions, Service Catalog items, Flow Designer automation and REST
+            integrations for a large-scale enterprise. Outside work I build and
+            ship my own products: Quizly, an AI-powered quiz app live on Google
+            Play, along with Android apps, a 3D multiplayer game and full-stack
+            web apps on Firebase and Cloudflare Workers.
           </p>
           {/* Resume Button */}
           <a

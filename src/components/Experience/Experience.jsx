@@ -12,7 +12,7 @@ const Experience = () => {
         <h2 className="text-4xl font-bold text-white">EXPERIENCE</h2>
         <div className="w-32 h-1 bg-purple-500 mx-auto mt-4"></div>
         <p className="text-gray-400 mt-4 text-lg font-semibold">
-          A showcase of my work experience and contributions at my organization.
+          My professional experience as a ServiceNow developer at Accenture.
         </p>
       </div>
 
@@ -40,7 +40,7 @@ const Experience = () => {
 
             {/* Content Section */}
             <div
-              className={`w-full sm:max-w-md p-4 sm:p-8 mt-8 mb-8 rounded-2xl shadow-2xl border border-white bg-gray-900 backdrop-blur-md shadow-[0_0_20px_1px_rgba(130,69,236,0.3)] mx-auto transform transition-transform duration-300 hover:scale-105`}
+              className={`w-full sm:w-[calc(50%-3rem)] sm:max-w-md p-4 sm:p-8 mt-8 mb-8 rounded-2xl shadow-2xl border border-white bg-gray-900 backdrop-blur-md shadow-[0_0_20px_1px_rgba(130,69,236,0.3)] mx-auto sm:mx-0 transform transition-transform duration-300 hover:scale-105`}
             >
               {/* Flex container for image and text */}
               <div className="flex items-center space-x-6">
@@ -71,6 +71,13 @@ const Experience = () => {
               </div>
 
               <p className="mt-4 text-gray-400">{experience.desc}</p>
+              {experience.highlights && (
+                <ul className="mt-4 space-y-2 text-gray-400 text-sm list-disc pl-5">
+                  {experience.highlights.map((point, index) => (
+                    <li key={index}>{point}</li>
+                  ))}
+                </ul>
+              )}
               <div className="mt-4">
                 <h5 className="font-medium text-white">Skills:</h5>
                 <ul className="flex flex-wrap mt-2">

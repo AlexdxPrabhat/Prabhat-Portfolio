@@ -39,6 +39,7 @@ const Work = () => {
               <img
                 src={project.image}
                 alt={project.title}
+                style={{ objectPosition: project.imagePosition }}
                 className="w-full h-48 object-cover rounded-xl"
               />
             </div>
@@ -46,6 +47,11 @@ const Work = () => {
               <h3 className="text-2xl font-bold text-white mb-2">
                 {project.title}
               </h3>
+              {project.status && (
+                <span className="inline-block text-xs font-semibold text-green-400 border border-green-400/40 rounded-full px-2 py-0.5">
+                  {project.status}
+                </span>
+              )}
               <p className="text-gray-500 mb-4 pt-4 line-clamp-3">
                 {project.description}
               </p>
@@ -67,7 +73,7 @@ const Work = () => {
       {/* Modal Container */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4">
-          <div className="bg-gray-900 rounded-xl shadow-2xl lg:w-full w-[90%] max-w-3xl overflow-hidden relative">
+          <div className="bg-gray-900 rounded-xl shadow-2xl lg:w-full w-[90%] max-w-3xl max-h-[90vh] overflow-y-auto relative">
             <div className="flex justify-end p-4">
               <button
                 onClick={handleCloseModal}
@@ -103,28 +109,30 @@ const Work = () => {
                   ))}
                 </div>
                 <div className="flex gap-4">
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-1/2 bg-gray-800 hover:bg-purple-800 text-gray-400 lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
-                  >
-                    View Code
-                  </a>
-                  <a
-                    href={selectedProject.webapp || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      if (!selectedProject.webapp) {
-                        e.preventDefault(); // Stop the link
-                        alert("Live is Not Available !Cmd tool");
-                      }
-                    }}
-                    className="w-1/2 bg-purple-600 hover:bg-purple-800 text-white lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
-                  >
-                    View Live
-                  </a>
+                  {selectedProject.github && (
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-gray-800 hover:bg-purple-800 text-gray-400 lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
+                    >
+                      {selectedProject.githubLabel || "View Code"}
+                    </a>
+                  )}
+                  {selectedProject.webapp ? (
+                    <a
+                      href={selectedProject.webapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-purple-600 hover:bg-purple-800 text-white lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center"
+                    >
+                      {selectedProject.webappLabel || "View Live"}
+                    </a>
+                  ) : (
+                    <span className="flex-1 bg-gray-800 text-gray-500 lg:px-6 lg:py-2 px-2 py-1 rounded-xl lg:text-xl text-sm font-semibold text-center cursor-default">
+                      {selectedProject.status || "Live demo not available"}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

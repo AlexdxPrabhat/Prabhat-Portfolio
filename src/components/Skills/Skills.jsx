@@ -45,11 +45,18 @@ const Skills = () => (
                   key={skill.name}
                   className="flex items-center justify-center space-x-2 bg-transparent border-2 border-gray-700 rounded-3xl py-2 px-2 sm:py-2 sm:px-2 text-center"
                 >
-                  <img
-                    src={skill.logo}
-                    alt={`${skill.name} logo`}
-                    className="w-6 h-6 sm:w-8 sm:h-8"
-                  />
+                  {skill.icon ? (
+                    <skill.icon
+                      aria-hidden="true"
+                      className="w-6 h-6 sm:w-8 sm:h-8 shrink-0 text-[#62d84e]"
+                    />
+                  ) : (
+                    <img
+                      src={skill.logo}
+                      alt={`${skill.name} logo`}
+                      className="w-6 h-6 sm:w-8 sm:h-8 shrink-0 object-contain"
+                    />
+                  )}
                   <span className="text-xs sm:text-sm text-gray-300">
                     {skill.name}
                   </span>
