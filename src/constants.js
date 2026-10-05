@@ -56,18 +56,18 @@ import graphicEraHill from "./assets/education_logo/graphicerahilluniversity_log
 import sgrrPP from "./assets/education_logo/sgrrPP.png";
 
 // Project Section Logo's
-import quizly from "./assets/work_logo/quizly.webp";
-import ukExamPrep from "./assets/work_logo/ukExamPrep.webp";
-import rps3d from "./assets/work_logo/rps3d.webp";
-import househelp from "./assets/work_logo/househelp.webp";
-import ukdYouth from "./assets/work_logo/ukdYouth.webp";
-import chitChat from "./assets/work_logo/Chit-Chat.webp";
-import pasteApp from "./assets/work_logo/pasteApp.webp";
-import razorPay from "./assets/work_logo/razorPay.webp";
-import LeetCodeMetric from "./assets/work_logo/LeeetCodeMetric.webp";
-import weatherApp from "./assets/work_logo/weatherApp.webp";
-import studySync from "./assets/work_logo/studySync.webp";
-import promptDeploy from "./assets/work_logo/promptDeploy.webp";
+import quizly from "./assets/work_logo/quizly.jpg";
+import ukExamPrep from "./assets/work_logo/ukExamPrep.jpg";
+import rps3d from "./assets/work_logo/rps3d.jpg";
+import househelp from "./assets/work_logo/househelp.jpg";
+import ukdYouth from "./assets/work_logo/ukdYouth.jpg";
+import chitChat from "./assets/work_logo/Chit-Chat.png";
+import pasteApp from "./assets/work_logo/pasteApp.png";
+import razorPay from "./assets/work_logo/razorPay.png";
+import LeetCodeMetric from "./assets/work_logo/LeeetCodeMetric.png";
+import weatherApp from "./assets/work_logo/weatherApp.png";
+import studySync from "./assets/work_logo/studySync.png";
+import promptDeploy from "./assets/work_logo/promptDeploy.png";
 
 // A skill shows either an image `logo` or a react-icons `icon`.
 export const SkillsInfo = [
@@ -250,9 +250,6 @@ export const projects = [
   {
     id: 0,
     title: "Quizly",
-    year: "2026",
-    featured: true,
-    summary: "AI-powered quiz platform for Android, live on Google Play.",
     status: "Live on Google Play",
     description:
       "An AI-powered quiz platform for Android, live on Google Play. Built with Kotlin and Jetpack Compose (MVVM + Clean Architecture) and fully usable offline. It adds an AI tutor, \"Explain with AI\" for wrong answers, and AI quiz generation from a topic, pasted notes or a web URL. AI requests go through a Cloudflare Worker proxy with Firebase-token auth and D1-backed quotas, so no provider keys ship in the app. A nightly server-side pipeline generates a shared Daily Challenge, alongside XP, streaks, achievements, a Daily Quest Circuit and Firestore leaderboards. An iOS version built with Expo / React Native is in development.",
@@ -266,9 +263,6 @@ export const projects = [
   {
     id: 1,
     title: "Uttarakhand Exam Prep",
-    year: "2026",
-    featured: true,
-    summary: "Hindi-first exam prep with 20,000+ previous-year questions and an AI tutor.",
     status: "Coming soon to Google Play",
     description:
       "A Hindi-first preparation app for Uttarakhand state government exams: UKPSC, UKSSSC, Police/SI, Patwari, UTET and Forest Guard. It has 20,000+ tagged previous-year questions spanning nearly two decades, mock exams with negative marking and pacing feedback against each paper's official time limit, subject-wise practice, an AI study tutor in Hindi and English, daily quests and leaderboards. Built with Kotlin and Jetpack Compose on Firebase and Cloudflare Workers, with a Python pipeline that crawls, parses and classifies the question bank.",
@@ -281,9 +275,6 @@ export const projects = [
   {
     id: 2,
     title: "Rock Paper Scissors 3D",
-    year: "2026",
-    featured: true,
-    summary: "Real-time online duels in a fully 3D arena, built in Unity 6.",
     status: "Coming soon to Google Play",
     description:
       "A fully 3D Rock Paper Scissors game built in Unity 6 with C#. Players duel live online through Quick Match or private room codes, served by a Cloudflare Worker with Durable Objects, or practice offline against an AI rival. It includes a championship league against 9 rivals, five animated 3D contenders and XP ranks from Bronze to Master. The whole UI is built in code on a custom design system, and headless build and QA scripts automate the Windows and Android builds.",
@@ -295,9 +286,6 @@ export const projects = [
   {
     id: 3,
     title: "HouseHelp",
-    year: "2026",
-    featured: true,
-    summary: "Customer and partner apps for booking house help in about 10 minutes.",
     status: "In development",
     description:
       "An on-demand house-help booking platform made of two Android apps: a customer app to book background-verified experts instantly (about 10 minutes) or in 15-minute slots, and a Partner app where workers accept and complete jobs. A Cloudflare Worker owns pricing, slot capacity, bookings, refunds and wallet logic, and a once-a-minute cron dispatches experts and sends FCM push updates. Firestore security rules enforce data ownership, maps use free MapLibre and OpenStreetMap tiles, and the whole stack runs on free tiers.",
@@ -309,9 +297,6 @@ export const projects = [
   {
     id: 4,
     title: "UKD Youth Dehradun",
-    year: "2026",
-    featured: true,
-    summary: "Server-rendered site and admin panel on Cloudflare Workers.",
     status: "Private repo · in staging",
     description:
       "A server-rendered website and admin panel for the Dehradun youth wing of Uttarakhand Kranti Dal, built with Astro on Cloudflare Workers with D1 and R2. It has a member directory with draft/publish controls and consent-gated contact details, Better Auth sessions with three server-enforced roles, Turnstile-protected contact forms with an email outbox, audit history, and a cinematic GSAP ScrollTrigger homepage with a full static fallback for reduced-motion visitors.",
@@ -324,9 +309,6 @@ export const projects = [
   {
     id: 5,
     title: "Chit Chat",
-    year: "2025",
-    featured: false,
-    summary: "Real-time MERN chat with Socket.io.",
     description:
       "A real-time chat application built using the MERN stack (MongoDB, Express.js, React.js, and Node.js). It enables users to send and receive instant messages in one-on-one and group chats. Features include user authentication, real-time messaging powered by Socket.io, online/offline status indicators, and a clean, responsive UI with dark mode support. Designed for seamless communication and modern performance.",
     image: chitChat,
@@ -337,9 +319,6 @@ export const projects = [
   {
     id: 6,
     title: "PromptDeploy",
-    year: "2025",
-    featured: false,
-    summary: "Prompt-to-website generator that auto-deploys to Firebase.",
     status: "Command-line tool",
     description:
       "A Python-powered automation tool that generates and deploys complete websites from natural language prompts. Users provide a prompt in the command line, and the app leverages the Gemini Flash API to generate HTML, CSS, and JS code, which is then auto-deployed to Firebase for instant hosting. Streamlines web creation for rapid prototyping and deployment.",
@@ -351,9 +330,6 @@ export const projects = [
   {
     id: 7,
     title: "PasteApp",
-    year: "2025",
-    featured: false,
-    summary: "Paste manager built with React and Redux.",
     description:
       "A modern paste management web app built with React.js and Tailwind CSS. Allows users to create, edit, view, delete, and search pastes with an intuitive interface. Features include real-time paste creation, timestamping, and easy copy/share functionality. Designed for speed, usability, and clean dark-mode aesthetics",
     image: pasteApp,
@@ -364,9 +340,6 @@ export const projects = [
   {
     id: 8,
     title: "RazorPay Clone",
-    year: "2025",
-    featured: false,
-    summary: "Pixel-perfect Razorpay landing page clone.",
     description:
       "A responsive Razorpay landing page clone built with React, TailwindCss showcasing modern UI design inspired by the original Razorpay site. Features include glassmorphism effects, smooth scroll, interactive elements, and a pixel-perfect layout. Fully optimized for mobile and desktop screens.",
     image: razorPay,
@@ -377,9 +350,6 @@ export const projects = [
   {
     id: 9,
     title: "LeetCodeMetric",
-    year: "2025",
-    featured: false,
-    summary: "Animated dashboard for LeetCode stats.",
     description:
       "A high-performance web app that fetches and visualizes LeetCode stats in an ultra-clean, animated, and interactive dashboard. Features dynamic conic gradient charts, instant data fetch on username input, and a fully responsive design for all devices.",
     image: LeetCodeMetric,
@@ -390,9 +360,6 @@ export const projects = [
   {
     id: 10,
     title: "WeatherApp",
-    year: "2025",
-    featured: false,
-    summary: "Real-time weather for any city.",
     description:
       "A sleek and responsive weather prediction app that provides real-time weather details for any city worldwide. Features dynamic icons, fast data fetching, and a lightweight UI for a smooth user experience across all devices.",
     image: weatherApp,
@@ -403,9 +370,6 @@ export const projects = [
   {
     id: 11,
     title: "StudySync",
-    year: "2025",
-    featured: false,
-    summary: "Concept site for an education platform.",
     description:
       "An original and modern website concept for my future educational platform, StudySync. Built using HTML, CSS, and JavaScript, it features smooth animations, a clean and professional layout, and sections to showcase services, testimonials, and features. Designed as a foundation for scaling into a full-featured learning portal.",
     image: studySync,
@@ -414,42 +378,3 @@ export const projects = [
     webapp: "https://alexdxprabhat.github.io/StudySync/",
   },
 ];
-
-export const stats = [
-  { value: 2, suffix: "+", label: "Years building on ServiceNow at Accenture" },
-  { value: 3000, prefix: "~", label: "Configuration Items modelled in the CMDB" },
-  { value: 90, prefix: "~", suffix: " hrs", label: "Saved every year by one scheduled flow" },
-  { value: 20000, suffix: "+", label: "Exam questions powering Uttarakhand Exam Prep" },
-];
-
-export const marqueeWords = [
-  "ServiceNow",
-  "Flow Designer",
-  "CMDB",
-  "IntegrationHub",
-  "Kotlin",
-  "Jetpack Compose",
-  "React",
-  "TypeScript",
-  "Cloudflare Workers",
-  "Firebase",
-  "Unity 6",
-  "Astro",
-  "Node.js",
-  "AI",
-];
-
-export const socials = [
-  { label: "GitHub", href: "https://github.com/AlexdxPrabhat" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/prabhat-bisht-4668971a6" },
-  { label: "YouTube", href: "https://www.youtube.com/@ShadowGDevloper" },
-  { label: "Credly", href: "https://www.credly.com/badges/d8e32229-9b66-485c-97b7-45dd7a8a81f2" },
-];
-
-export const profile = {
-  name: "Prabhat Bisht",
-  email: "prabhishtalexdx@gmail.com",
-  location: "Bengaluru, India",
-  timeZone: "Asia/Kolkata",
-  resume: "https://drive.google.com/file/d/1p_RuwH4DVcRDvdRZQlzTypEtKMVVCs7F/view?usp=sharing",
-};

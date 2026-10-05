@@ -1,44 +1,33 @@
-# Prabhat Bisht — Portfolio
+# 🌐 Animated Portfolio Website
 
-ServiceNow developer by day, product builder by night. A motion-driven portfolio built with React, GSAP and WebGL.
+A sleek, responsive, and fully customizable **animated portfolio website** built using **React.js** and **Tailwind CSS**. Designed to showcase projects, skills, and experience with a modern, clean UI and smooth animations.
 
-**Live:** https://prabhat-portfolio-umber.vercel.app/
+## 🚀 Live Demo
 
-## Highlights
+🔗 https://prabhat-portfolio-umber.vercel.app/
 
-- **Live WebGL hero**: a domain-warped light field that follows the cursor and reacts to the voice intro's loudness in real time
-- **AI voice intro** with synced captions, generated offline with [Kokoro](https://github.com/hexgrad/kokoro) (Apache-2.0)
-- **Motion system** on GSAP (ScrollTrigger + SplitText) and Lenis smooth scrolling:
-  loader curtain, masked letter reveals, scroll-scrubbed text, count-up stats, velocity-reactive marquee,
-  pinned horizontal project gallery with parallax, cursor-following previews, magnetic buttons and a custom cursor
-- **Fully responsive**: heavy effects scale down on phones; `prefers-reduced-motion` gets a calm, static version
-- **Accessible**: keyboard-friendly menus and dialogs, focus trapping, live captions, skip link
+## 🛠️ Tech Stack
 
-## Stack
+- ⚛️ React.js
+- 🎨 Tailwind CSS
+- 💾 Vercel (for deployment)
 
-React 18 · Vite · Tailwind CSS · GSAP · Lenis · raw WebGL · EmailJS · Vercel
+## 📁 Features
 
-## Develop
+- Responsive design for all screen sizes 📱💻  
+- Smooth scroll and animation effects ✨  
+- Clean and modular React components 🧩  
+- Easy to customize with Tailwind utility classes 🎯  
+- Professional sections: About, Skills, Experience, Certifications, Projects, Education and Contact 👨‍💻  
 
-```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # production build in dist/
-npm run lint
-```
+## 🗂️ Featured work
 
-All content (experience, certifications, projects, skills, education, stats) lives in `src/constants.js`.
+- **Quizly**: AI-powered quiz app for Android, [live on Google Play](https://play.google.com/store/apps/details?id=com.anintellectualcompany.quizly)
+- **Uttarakhand Exam Prep**: Hindi-first prep app for UKPSC, UKSSSC, Police, Patwari and UTET exams
+- **Rock Paper Scissors 3D**: Unity 6 online multiplayer game on Cloudflare Durable Objects
+- **HouseHelp**: house-help booking platform with customer and partner Android apps
+- **UKD Youth Dehradun**: Astro + Cloudflare Workers website with an admin panel
 
-## Regenerating the voice intro
+All content (skills, experience, certifications, projects, education) lives in `src/constants.js`.
 
-The narration script, voice and pronunciations are in `scripts/generate-intro-audio.py`.
 
-```bash
-pip install kokoro-onnx soundfile
-# download kokoro-v1.0.onnx and voices-v1.0.bin from
-# https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0
-python scripts/generate-intro-audio.py --models path/to/model-dir
-```
-
-This writes `src/assets/audio/intro.mp3` and the caption timings in `intro-captions.json` (needs ffmpeg on PATH).
-Change `VOICE` in the script (for example `am_michael` or `bm_george`) for a different narrator.

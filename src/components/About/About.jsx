@@ -1,139 +1,85 @@
-import { useRef } from "react";
-import { FiArrowUpRight } from "react-icons/fi";
-import { gsap, useGSAP, SplitText, revealUp, prefersReducedMotion } from "../../lib/motion";
-import { profile, stats } from "../../constants";
-import profileImage from "../../assets/profile2.webp";
+import React from "react";
+import ReactTypingEffect from "react-typing-effect";
+import Tilt from "react-parallax-tilt";
+import profileImage from "../../assets/profile2.png";
 
 const About = () => {
-  const root = useRef(null);
-
-  useGSAP(
-    () => {
-      const reduced = prefersReducedMotion();
-      revealUp(".ab-eyebrow, .ab-copy, .ab-cta", { trigger: root.current });
-      revealUp(".stat", { trigger: ".stats", stagger: 0.1 });
-
-      if (reduced) {
-        gsap.set(".ab-statement", { autoAlpha: 1 });
-        return;
-      }
-
-      // Statement lights up word by word as it scrolls through the viewport
-      const split = SplitText.create(".ab-statement", { type: "words" });
-      gsap.set(".ab-statement", { autoAlpha: 1 });
-      gsap.fromTo(
-        split.words,
-        { opacity: 0.14 },
-        {
-          opacity: 1,
-          ease: "none",
-          stagger: 0.1,
-          scrollTrigger: { trigger: ".ab-statement", start: "top 80%", end: "bottom 40%", scrub: true },
-        }
-      );
-
-      // Portrait: wipe in, then drift
-      gsap.fromTo(
-        ".ab-photo",
-        { clipPath: "inset(100% 0% 0% 0%)" },
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-          duration: 1.6,
-          ease: "expo.inOut",
-          scrollTrigger: { trigger: ".ab-photo", start: "top 85%", once: true },
-        }
-      );
-      gsap.fromTo(
-        ".ab-photo img",
-        { yPercent: -8, scale: 1.2 },
-        { yPercent: 8, scale: 1.08, ease: "none", scrollTrigger: { trigger: ".ab-photo", start: "top bottom", end: "bottom top", scrub: true } }
-      );
-
-      // Count-up numbers
-      gsap.utils.toArray(".stat-num").forEach((el) => {
-        const target = Number(el.dataset.value);
-        const obj = { v: 0 };
-        gsap.to(obj, {
-          v: target,
-          duration: 2,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 90%", once: true },
-          onUpdate: () => {
-            el.textContent = Math.round(obj.v).toLocaleString("en-US");
-          },
-        });
-      });
-    },
-    { scope: root }
-  );
-
   return (
-    <section id="about" ref={root} className="section">
-      <div className="container-x">
-        <p className="ab-eyebrow eyebrow invisible">
-          <span className="tabular-nums">(01)</span> About
-        </p>
-
-        <div className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
-            <figure className="ab-photo relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl bg-surface lg:max-w-none">
-              <img
-                src={profileImage}
-                alt="Portrait of Prabhat Bisht"
-                loading="lazy"
-                className="h-full w-full object-cover object-[50%_20%] grayscale-[35%] transition-[filter] duration-700 hover:grayscale-0"
-              />
-              <figcaption className="absolute inset-x-3 bottom-3 flex items-center justify-between rounded-full bg-ink/60 px-4 py-2 text-xs text-paper/80 backdrop-blur-md">
-                <span>{profile.name}</span>
-                <span>{profile.location}</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <div className="lg:col-span-8">
-            <p className="ab-statement invisible text-[clamp(1.75rem,4.2vw,3.75rem)] font-medium leading-[1.08] tracking-[-0.03em]">
-              I build enterprise workflows at Accenture{" "}
-              <span className="font-serif font-normal italic text-lime">by day</span> and ship my own products{" "}
-              <span className="font-serif font-normal italic text-lime">by night</span>: AI-powered apps, a 3D multiplayer
-              game and full-stack platforms on Firebase and Cloudflare.
-            </p>
-
-            <div className="mt-12 grid gap-8 text-paper/65 md:grid-cols-2 md:gap-10 lg:mt-16">
-              <p className="ab-copy invisible leading-relaxed">
-                As a ServiceNow developer and Certified System Administrator, I deliver Service Catalog items, Flow
-                Designer automation, scripting and REST integrations in Agile sprints, from development to production.
-              </p>
-              <p className="ab-copy invisible leading-relaxed">
-                Outside work I design, build and ship end to end: Kotlin and Jetpack Compose on Android, React and Astro
-                on the web, Unity for games, with Firebase and Cloudflare Workers behind them.
-              </p>
-            </div>
-
-            <a
-              href={profile.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ab-cta link-underline invisible mt-10 inline-flex items-center gap-2 text-lg"
-            >
-              Download my résumé <FiArrowUpRight aria-hidden="true" />
-            </a>
-          </div>
+    <section
+      id="about"
+      className="py-4 px-[7vw] md:px-[7vw] lg:px-[20vw] font-sans mt-16 md:mt-24 lg:mt-32"
+    >
+      <div className="flex flex-col-reverse md:flex-row justify-between items-center">
+        {/* Left Side */}
+        <div className="md:w-1/2 text-center md:text-left mt-8 md:mt-0">
+          {/* Greeting */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 leading-tight">
+            Hi, I am
+          </h1>
+          {/* Name */}
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+            Prabhat Bisht
+          </h2>
+          {/* Skills Heading with Typing Effect */}
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 text-[#8245ec] leading-tight">
+            <span className="text-white">I am a </span>
+            <ReactTypingEffect
+              text={[
+                "ServiceNow Developer",
+                "Full-Stack Developer",
+                "Mobile App Developer",
+              ]}
+              speed={200}
+              eraseSpeed={50}
+              typingDelay={500}
+              eraseDelay={2000}
+              cursorRenderer={(cursor) => (
+                <span className="text-[#8245ec]">{cursor}</span>
+              )}
+            />
+          </h3>
+          {/* About Me Paragraph */}
+          <p className="text-base sm:text-lg md:text-lg text-gray-400 mb-10 mt-8 leading-relaxed">
+            I’m Prabhat Bisht, a ServiceNow Developer and Certified System
+            Administrator (CSA) at Accenture, where I build ITSM and CMDB
+            solutions, Service Catalog items, Flow Designer automation and REST
+            integrations for a large-scale enterprise. Outside work I build and
+            ship my own products: Quizly, an AI-powered quiz app live on Google
+            Play, along with Android apps, a 3D multiplayer game and full-stack
+            web apps on Firebase and Cloudflare Workers.
+          </p>
+          {/* Resume Button */}
+          <a
+            href="https://drive.google.com/file/d/1p_RuwH4DVcRDvdRZQlzTypEtKMVVCs7F/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-white py-3 px-8 rounded-full mt-5 text-lg font-bold transition duration-300 transform hover:scale-105"
+            style={{
+              background: "linear-gradient(90deg, #8245ec, #a855f7)",
+              boxShadow: "0 0 2px #8245ec, 0 0 2px #8245ec, 0 0 40px #8245ec",
+            }}
+          >
+            DOWNLOAD CV
+          </a>
         </div>
-
-        <dl className="stats mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line lg:mt-28 lg:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="stat invisible flex flex-col-reverse justify-end bg-ink p-5 md:p-8">
-              <dt className="mt-3 max-w-[16rem] text-sm text-muted">{s.label}</dt>
-              <dd className="display text-[clamp(2.25rem,6vw,5rem)]">
-                <span className="text-muted">{s.prefix}</span>
-                <span className="stat-num tabular-nums" data-value={s.value}>
-                  {s.value.toLocaleString("en-US")}
-                </span>
-                <span className="text-lime">{s.suffix}</span>
-              </dd>
-            </div>
-          ))}
-        </dl>
+        {/* Right Side */}
+        <div className="md:w-1/2 flex justify-center md:justify-end">
+          <Tilt
+            className="w-48 h-48 sm:w-64 sm:h-64 md:w-[30rem] md:h-[30rem] border-4 border-purple-700 rounded-full"
+            tiltMaxAngleX={20}
+            tiltMaxAngleY={20}
+            perspective={1000}
+            scale={1.05}
+            transitionSpeed={1000}
+            gyroscope={true}
+          >
+            <img
+              src={profileImage}
+              alt="Prabhat Bisht"
+              className="w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)]"
+            />
+          </Tilt>
+        </div>
       </div>
     </section>
   );

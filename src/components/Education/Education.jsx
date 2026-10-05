@@ -1,68 +1,80 @@
-import { useRef } from "react";
-import { FiPlus } from "react-icons/fi";
-import { gsap, useGSAP, ScrollTrigger, prefersReducedMotion } from "../../lib/motion";
-import { education } from "../../constants";
-import SectionHeading from "../ui/SectionHeading";
+import React from "react";
+import { education } from "../../constants"; // Import the education data
 
 const Education = () => {
-  const root = useRef(null);
-
-  useGSAP(
-    () => {
-      const rows = gsap.utils.toArray(".edu-row");
-      if (prefersReducedMotion()) {
-        gsap.set(rows, { autoAlpha: 1 });
-        return;
-      }
-      rows.forEach((row) => {
-        gsap
-          .timeline({ scrollTrigger: { trigger: row, start: "top 88%", once: true } })
-          .set(row, { autoAlpha: 1 })
-          .from(row.querySelector(".edu-line"), { scaleX: 0, duration: 1.2, ease: "expo.inOut" })
-          .from(row.querySelectorAll(".edu-rise"), { y: 30, autoAlpha: 0, duration: 1, ease: "expo.out", stagger: 0.06 }, "-=0.8");
-      });
-    },
-    { scope: root }
-  );
-
   return (
-    <section id="education" ref={root} className="section">
-      <div className="container-x">
-        <SectionHeading
-          index={6}
-          label="Education"
-          title={
-            <>
-              Always <span className="font-serif font-normal italic text-lime">learning</span>
-            </>
-          }
-        />
+    <section
+      id="education"
+      className="py-24 pb-24 px-[12vw] md:px-[7vw] lg:px-[16vw] font-sans bg-skills-gradient clip-path-custom-3"
+    >
+      {/* Section Title */}
+      <div className="text-center mb-16">
+        <h2 className="text-4xl font-bold text-white">EDUCATION</h2>
+        <div className="w-32 h-1 bg-purple-500 mx-auto mt-4"></div>
+        <p className="text-gray-400 mt-4 text-lg font-semibold">
+          My education has been a journey of learning and development. Here are the details of my academic background
+        </p>
+      </div>
 
-        <ol>
-          {education.map((edu) => (
-            <li key={edu.id} className="edu-row invisible relative">
-              <span className="edu-line absolute inset-x-0 top-0 h-px origin-left bg-line" />
-              <details className="group" onToggle={() => ScrollTrigger.refresh()}>
-                <summary className="grid cursor-pointer list-none grid-cols-[1fr_auto] items-start gap-4 py-8 md:grid-cols-12 md:gap-8 md:py-10 [&::-webkit-details-marker]:hidden">
-                  <span className="edu-rise text-sm text-muted tabular-nums md:col-span-3">{edu.date}</span>
-                  <span className="edu-rise col-span-2 row-start-2 md:col-span-6 md:row-start-auto">
-                    <span className="block text-2xl font-medium leading-tight tracking-[-0.02em] md:text-3xl">{edu.degree}</span>
-                    <span className="mt-2 block text-paper/60">{edu.school}</span>
-                  </span>
-                  <span className="edu-rise col-start-2 row-start-1 flex items-center justify-end gap-4 md:col-span-3 md:col-start-auto md:row-start-auto">
-                    <span className="rounded-full border border-line px-3 py-1 text-sm text-lime">{edu.grade}</span>
-                    <span className="grid h-9 w-9 place-items-center rounded-full border border-line transition-transform duration-500 ease-expo group-open:rotate-45">
-                      <FiPlus aria-hidden="true" />
-                      <span className="sr-only">Toggle details</span>
-                    </span>
-                  </span>
-                </summary>
-                <p className="max-w-3xl pb-10 leading-relaxed text-paper/60 md:ml-[25%] md:pl-8">{edu.desc}</p>
-              </details>
-            </li>
-          ))}
-        </ol>
-        <div className="h-px bg-line" />
+      {/* Education Timeline */}
+      <div className="relative">
+        {/* Vertical line */}
+        <div className="absolute sm:left-1/2 left-0 transform -translate-x-1/2 sm:-translate-x-0 w-1 bg-white h-full"></div>
+
+        {/* Education Entries */}
+        {education.map((edu, index) => (
+          <div
+            key={edu.id}
+            className={`flex flex-col sm:flex-row items-center mb-16 ${
+              index % 2 === 0 ? "sm:justify-start" : "sm:justify-end"
+            }`}
+          >
+            {/* Timeline Circle */}
+            <div className="absolute sm:left-1/2 left-0 transform -translate-x-1/2 bg-gray-400 border-4 border-[#8245ec] w-12 h-12 sm:w-16 sm:h-16 rounded-full flex justify-center items-center z-10">
+              <img
+                src={edu.img}
+                alt={edu.school}
+                className="w-full h-full object-cover rounded-full"
+              />
+            </div>
+
+            {/* Content Section */}
+            <div
+              className={`w-full sm:max-w-md p-4 sm:p-8 rounded-2xl shadow-2xl border border-white bg-gray-900 backdrop-blur-md shadow-[0_0_20px_1px_rgba(130,69,236,0.3)] ${
+                index % 2 === 0 ? "sm:ml-0" : "sm:mr-0"
+              } sm:ml-44 sm:mr-44 ml-8 transform transition-transform duration-300 hover:scale-105`}
+            >
+              {/* Flex container for image and text */}
+              <div className="flex items-center space-x-6">
+                {/* School Logo/Image */}
+                <div className="w-24 h-16 bg-white rounded-md overflow-hidden">
+                  <img
+                    src={edu.img}
+                    alt={edu.school}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Degree, School Name, and Date */}
+                <div className="flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl sm:text-xl font-semibold text-white">
+                      {edu.degree}
+                    </h3>
+                    <h4 className="text-md sm:text-sm text-gray-300">
+                      {edu.school}
+                    </h4>
+                  </div>
+                  {/* Date at the bottom */}
+                  <p className="text-sm text-gray-500 mt-2">{edu.date}</p>
+                </div>
+              </div>
+
+              <p className="mt-4 text-gray-400 font-bold">Grade: {edu.grade}</p>
+              <p className="mt-4 text-gray-400">{edu.desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
