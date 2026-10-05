@@ -1,6 +1,6 @@
 # Prabhat Bisht — Portfolio
 
-ServiceNow developer by day, product builder by night. A motion-driven portfolio built with React, GSAP and WebGL.
+ServiceNow developer by day, product builder by night. A motion-driven portfolio built with React and GSAP.
 
 **Live:** https://prabhat-portfolio-umber.vercel.app/
 
@@ -12,7 +12,7 @@ ServiceNow developer by day, product builder by night. A motion-driven portfolio
   loader curtain, masked letter reveals, scroll-scrubbed text, count-up stats, velocity-reactive marquee,
   pinned horizontal project gallery with parallax, cursor-following previews, magnetic buttons and a custom cursor
 - **Fully responsive**: heavy effects scale down on phones; `prefers-reduced-motion` gets a calm, static version
-- **Accessible**: keyboard-friendly menus and dialogs, focus trapping, live captions, skip link
+- **Accessible**: keyboard-friendly menus and dialogs, focus trapping, skip link
 
 ## Stack
 
