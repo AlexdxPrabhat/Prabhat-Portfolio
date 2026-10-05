@@ -3,7 +3,7 @@ import { FiArrowDown, FiArrowUpRight } from "react-icons/fi";
 import { gsap, useGSAP, SplitText, ScrollTrigger, scrollToSection, prefersReducedMotion } from "../../lib/motion";
 import { profile } from "../../constants";
 import MagneticButton from "../ui/MagneticButton";
-import AvatarStage from "./AvatarStage";
+import PortraitStage from "./PortraitStage";
 
 const roles = ["enterprise workflows", "AI-powered apps", "3D multiplayer games", "full-stack platforms"];
 const proof = ["ServiceNow CSA certified", "2+ years at Accenture", "Quizly live on Google Play"];
@@ -26,11 +26,7 @@ const Hero = ({ ready }) => {
       gsap.set(title, { autoAlpha: 1 });
       gsap
         .timeline({ defaults: { ease: "expo.out" } })
-        .fromTo(
-          ".hero-stage",
-          { autoAlpha: 0, clipPath: "inset(18% 12% 18% 12% round 2rem)", scale: 1.08 },
-          { autoAlpha: 1, clipPath: "inset(0% 0% 0% 0% round 2rem)", scale: 1, duration: 1.6, ease: "expo.inOut" }
-        )
+        .set(".hero-stage", { autoAlpha: 1 })
         .from(split.chars, { yPercent: 110, duration: 1.2, stagger: 0.025 }, 0.35)
         .fromTo(".hero-fade", { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 1.1, stagger: 0.07 }, 0.6);
 
@@ -126,8 +122,8 @@ const Hero = ({ ready }) => {
         </div>
 
         <div className="order-1 lg:order-2 lg:col-span-5">
-          <div className="hero-stage invisible mx-auto w-full max-w-[19rem] sm:max-w-sm lg:max-w-[30rem]">
-            <AvatarStage />
+          <div className="hero-stage invisible mx-auto w-full max-w-[18rem] sm:max-w-sm lg:max-w-[30rem]">
+            <PortraitStage ready={ready} />
           </div>
         </div>
       </div>

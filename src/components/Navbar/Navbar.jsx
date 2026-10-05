@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import { gsap, useGSAP, ScrollTrigger, scrollToSection, lockScroll, prefersReducedMotion } from "../../lib/motion";
 import { profile, socials } from "../../constants";
-import { IntroToggle } from "../Intro/IntroControls";
 
 const links = [
   { id: "about", label: "About" },
@@ -140,7 +139,6 @@ const Navbar = ({ ready }) => {
           </ul>
 
           <div className="flex items-center gap-2">
-            <IntroToggle />
             <a
               href={profile.resume}
               target="_blank"
