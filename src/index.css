@@ -211,3 +211,9 @@ html {
     linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
   mask-composite: intersect;
 }
+
+/* Hero light beams: drift sideways and breathe (rotation lives here because the animation owns transform) */
+@keyframes beam {
+  0%, 100% { transform: translateX(-35%) rotate(18deg); opacity: 0.45; }
+  50% { transform: translateX(45%) rotate(18deg); opacity: 1; }
+}
