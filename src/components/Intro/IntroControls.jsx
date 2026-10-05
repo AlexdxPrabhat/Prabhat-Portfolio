@@ -1,34 +1,35 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiPause, FiPlay, FiX } from "react-icons/fi";
 import { gsap, useGSAP, prefersReducedMotion } from "../../lib/motion";
 import { useIntro } from "./IntroProvider";
 import Eq from "../ui/Eq";
+import poster from "../../assets/avatar/portrait.webp";
 
-const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
+/** Caption line whose words drift in each time the caption changes. */
+export const CaptionText = ({ className = "" }) => {
+  const { caption, captionIndex } = useIntro();
+  const ref = useRef(null);
 
-/** Large "Play my intro" button used in the hero. */
-export const IntroButton = ({ className = "" }) => {
-  const { status, toggle, duration } = useIntro();
-  const playing = status === "playing";
-  const label = playing ? "Pause intro" : status === "paused" ? "Resume intro" : "Play my intro";
+  useGSAP(
+    () => {
+      if (!ref.current || prefersReducedMotion()) return;
+      gsap.fromTo(
+        ref.current.querySelectorAll("span"),
+        { autoAlpha: 0, y: 8, filter: "blur(6px)" },
+        { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, stagger: 0.035, ease: "power3.out" }
+      );
+    },
+    { dependencies: [captionIndex] }
+  );
 
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-pressed={playing}
-      data-cursor={playing ? "Pause" : "Listen"}
-      className={`group inline-flex items-center gap-3 rounded-full border border-line bg-paper/[0.04] py-2 pl-2 pr-5 backdrop-blur-md transition-colors hover:border-paper/30 ${className}`}
-    >
-      <span className="grid h-10 w-10 place-items-center rounded-full bg-lime text-ink transition-transform duration-500 ease-expo group-hover:scale-110">
-        {playing ? <FiPause aria-hidden="true" /> : <FiPlay aria-hidden="true" className="translate-x-px" />}
-      </span>
-      <span className="text-left leading-tight">
-        <span className="block text-sm font-medium">{label}</span>
-        <span className="block text-xs text-muted">AI voice · {fmt(duration)}</span>
-      </span>
-      <Eq playing={playing} className="ml-1 text-lime" />
-    </button>
+    <p aria-live="polite" ref={ref} key={captionIndex} className={className}>
+      {(caption?.text ?? "…").split(" ").map((w, i) => (
+        <span key={i} className="inline-block whitespace-pre">
+          {w}{" "}
+        </span>
+      ))}
+    </p>
   );
 };
 
@@ -41,7 +42,7 @@ export const IntroToggle = ({ className = "" }) => {
       type="button"
       onClick={toggle}
       aria-pressed={playing}
-      aria-label={playing ? "Pause voice intro" : "Play voice intro"}
+      aria-label={playing ? "Pause my intro" : "Play my intro"}
       className={`inline-flex h-10 items-center gap-2 rounded-full border border-line px-4 text-xs uppercase tracking-[0.18em] text-paper/80 transition-colors hover:border-paper/30 hover:text-paper ${className}`}
     >
       <Eq playing={playing} className={playing ? "text-lime" : "text-paper/60"} />
@@ -50,76 +51,74 @@ export const IntroToggle = ({ className = "" }) => {
   );
 };
 
-/** Floating caption bar shown while the intro plays. */
+const useIsPhone = () => {
+  const query = "(max-width: 767px)";
+  const [phone, setPhone] = useState(() => window.matchMedia(query).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const on = () => setPhone(mq.matches);
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  return phone;
+};
+
+/**
+ * Floating caption bar, shown while the intro plays and either the avatar
+ * has been scrolled out of view or the screen is too small for in-frame captions.
+ */
 export const IntroCaptions = () => {
-  const { status, caption, captionIndex, audioRef, duration, toggle, stop } = useIntro();
+  const { status, stageVisible, mediaRef, duration, toggle, stop } = useIntro();
   const root = useRef(null);
   const bar = useRef(null);
-  const textRef = useRef(null);
-  const visible = status !== "idle";
+  const phone = useIsPhone();
+  const visible = status !== "idle" && (!stageVisible || phone);
 
   useGSAP(
     () => {
-      const reduced = prefersReducedMotion();
       gsap.to(root.current, {
         autoAlpha: visible ? 1 : 0,
         y: visible ? 0 : 30,
-        duration: reduced ? 0 : 0.7,
+        duration: prefersReducedMotion() ? 0 : 0.6,
         ease: "expo.out",
       });
     },
     { dependencies: [visible], scope: root }
   );
 
-  // New caption: words drift in from a soft blur
-  useGSAP(
-    () => {
-      if (!textRef.current || prefersReducedMotion()) return;
-      gsap.fromTo(
-        textRef.current.querySelectorAll("span"),
-        { autoAlpha: 0, y: 8, filter: "blur(6px)" },
-        { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.5, stagger: 0.035, ease: "power3.out" }
-      );
-    },
-    { dependencies: [captionIndex], scope: root }
-  );
-
   useEffect(() => {
     if (status !== "playing") return undefined;
     let id;
-    const tick = () => {
-      const a = audioRef.current;
-      if (bar.current && a) bar.current.style.transform = `scaleX(${Math.min(1, a.currentTime / duration)})`;
-      id = requestAnimationFrame(tick);
+    const loop = () => {
+      const el = mediaRef.current;
+      if (bar.current && el) bar.current.style.transform = `scaleX(${Math.min(1, el.currentTime / duration)})`;
+      id = requestAnimationFrame(loop);
     };
-    id = requestAnimationFrame(tick);
+    id = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(id);
-  }, [status, audioRef, duration]);
+  }, [status, mediaRef, duration]);
 
   return (
     <div
       ref={root}
       role="region"
-      aria-label="Voice intro captions"
-      className="invisible fixed inset-x-0 bottom-4 z-[70] mx-auto w-[min(560px,calc(100%_-_1.5rem))] opacity-0 md:bottom-6"
+      aria-label="Intro captions"
+      className="invisible fixed inset-x-0 bottom-4 z-[70] mx-auto w-[min(600px,calc(100%_-_1.5rem))] opacity-0 md:bottom-6"
     >
-      <div className="relative overflow-hidden rounded-2xl border border-line bg-ink/75 px-4 py-3 shadow-2xl backdrop-blur-xl md:px-5 md:py-4">
-        <div className="flex items-center gap-4">
+      <div className="relative overflow-hidden rounded-2xl border border-line bg-ink/80 py-3 pl-3 pr-4 shadow-2xl backdrop-blur-xl">
+        <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={toggle}
             aria-label={status === "playing" ? "Pause intro" : "Resume intro"}
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-lime text-ink"
+            className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-lime"
           >
-            {status === "playing" ? <FiPause aria-hidden="true" /> : <FiPlay aria-hidden="true" />}
+            <img src={poster} alt="" className="h-full w-full object-cover object-[50%_25%]" />
+            <span className="absolute inset-0 grid place-items-center bg-ink/40 text-paper">
+              {status === "playing" ? <FiPause aria-hidden="true" /> : <FiPlay aria-hidden="true" />}
+            </span>
           </button>
-          <p aria-live="polite" ref={textRef} key={captionIndex} className="min-h-[2.6em] flex-1 text-sm leading-snug text-paper md:text-base">
-            {(caption?.text ?? "…").split(" ").map((w, i) => (
-              <span key={i} className="inline-block whitespace-pre">
-                {w}{" "}
-              </span>
-            ))}
-          </p>
+          <CaptionText className="min-h-[2.6em] flex-1 text-sm leading-snug text-paper" />
           <button
             type="button"
             onClick={stop}

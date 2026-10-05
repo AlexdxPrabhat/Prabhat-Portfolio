@@ -1,7 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import introUrl from "../../assets/audio/intro.mp3";
-import captions from "../../assets/audio/intro-captions.json";
-import { audioLevel } from "../../lib/audioLevel";
+import captions from "../../assets/avatar/intro-captions.json";
 
 const IntroContext = createContext(null);
 
@@ -19,124 +17,93 @@ function captionIndexAt(t) {
 }
 
 /**
- * Owns the voice intro: playback state, the caption track, and a Web Audio
- * analyser that publishes loudness to `audioLevel` for the hero shader.
+ * Owns the talking-avatar intro: playback state and the caption track.
+ * The avatar <video> lives in the hero and registers itself here so the
+ * navbar toggle and the floating captions can drive it from anywhere.
  */
 export function IntroProvider({ children }) {
-  const audioRef = useRef(null);
-  const graph = useRef(null);
+  const media = useRef(null);
   const raf = useRef(0);
+  const indexRef = useRef(-1);
   const [status, setStatus] = useState("idle"); // idle | playing | paused
   const [index, setIndex] = useState(-1);
-  const indexRef = useRef(-1);
+  const [stageVisible, setStageVisible] = useState(true);
 
-  const meter = useCallback(() => {
-    const audio = audioRef.current;
-    const g = graph.current;
-    if (g) {
-      g.analyser.getByteTimeDomainData(g.data);
-      let sum = 0;
-      for (let i = 0; i < g.data.length; i++) {
-        const v = (g.data[i] - 128) / 128;
-        sum += v * v;
-      }
-      audioLevel.value = Math.min(1, Math.sqrt(sum / g.data.length) * 3.2);
-    } else {
-      // No analyser (very old browsers): fake a gentle pulse while speaking
-      audioLevel.value = 0.35 + Math.sin(performance.now() / 120) * 0.15;
-    }
-    const i = captionIndexAt(audio.currentTime);
+  const setCaption = (i) => {
     if (i !== indexRef.current) {
       indexRef.current = i;
       setIndex(i);
     }
-    raf.current = requestAnimationFrame(meter);
-  }, []);
-
-  const stopMeter = useCallback(() => {
-    cancelAnimationFrame(raf.current);
-    audioLevel.value = 0;
-  }, []);
-
-  const ensureGraph = () => {
-    if (graph.current) return;
-    try {
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      const ctx = new Ctx();
-      const source = ctx.createMediaElementSource(audioRef.current);
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 1024;
-      source.connect(analyser);
-      analyser.connect(ctx.destination);
-      graph.current = { ctx, analyser, data: new Uint8Array(analyser.fftSize) };
-    } catch {
-      graph.current = null;
-    }
   };
 
+  const tick = useCallback(() => {
+    if (media.current) setCaption(captionIndexAt(media.current.currentTime));
+    raf.current = requestAnimationFrame(tick);
+  }, []);
+
   const play = useCallback(async () => {
-    const audio = audioRef.current;
-    ensureGraph();
+    const el = media.current;
+    if (!el) return;
     try {
-      await graph.current?.ctx.resume();
-      if (audio.ended) audio.currentTime = 0;
-      await audio.play();
+      if (el.ended) el.currentTime = 0;
+      await el.play();
       setStatus("playing");
       cancelAnimationFrame(raf.current);
-      raf.current = requestAnimationFrame(meter);
+      raf.current = requestAnimationFrame(tick);
     } catch {
       setStatus("idle");
     }
-  }, [meter]);
+  }, [tick]);
 
   const pause = useCallback(() => {
-    audioRef.current.pause();
+    media.current?.pause();
+    cancelAnimationFrame(raf.current);
     setStatus("paused");
-    stopMeter();
-  }, [stopMeter]);
+  }, []);
 
   const stop = useCallback(() => {
-    const audio = audioRef.current;
-    audio.pause();
-    audio.currentTime = 0;
+    const el = media.current;
+    if (el) {
+      el.pause();
+      el.currentTime = 0;
+    }
+    cancelAnimationFrame(raf.current);
+    setCaption(-1);
     setStatus("idle");
-    indexRef.current = -1;
-    setIndex(-1);
-    stopMeter();
-  }, [stopMeter]);
+  }, []);
 
   const toggle = useCallback(() => {
     if (status === "playing") pause();
     else play();
   }, [status, pause, play]);
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    const onEnded = () => stop();
-    audio.addEventListener("ended", onEnded);
-    return () => {
-      audio.removeEventListener("ended", onEnded);
-      cancelAnimationFrame(raf.current);
-    };
-  }, [stop]);
+  // The hero hands over its <video> through this callback ref
+  const registerMedia = useCallback(
+    (el) => {
+      if (media.current) media.current.removeEventListener("ended", stop);
+      media.current = el;
+      if (el) el.addEventListener("ended", stop);
+    },
+    [stop]
+  );
+
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
 
   const value = useMemo(
     () => ({
       status,
       toggle,
       stop,
-      audioRef,
+      registerMedia,
+      mediaRef: media,
       caption: index >= 0 ? captions[index] : null,
       captionIndex: index,
       duration: INTRO_DURATION,
+      stageVisible,
+      setStageVisible,
     }),
-    [status, toggle, stop, index]
+    [status, toggle, stop, registerMedia, index, stageVisible]
   );
 
-  return (
-    <IntroContext.Provider value={value}>
-      {children}
-      <audio ref={audioRef} src={introUrl} preload="none" />
-    </IntroContext.Provider>
-  );
+  return <IntroContext.Provider value={value}>{children}</IntroContext.Provider>;
 }

@@ -225,3 +225,14 @@ html {
   border: 3px solid #07070a;
   border-radius: 999px;
 }
+
+/* Idle portrait: a slow, barely-there breath */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.025) translateY(-0.4%); }
+}
+
+.animate-breathe {
+  animation: breathe 7s ease-in-out infinite;
+  transform-origin: 50% 35%;
+}
