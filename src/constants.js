@@ -451,5 +451,5 @@ export const profile = {
   email: "prabhishtalexdx@gmail.com",
   location: "Bengaluru, India",
   timeZone: "Asia/Kolkata",
-  resume: "https://drive.google.com/file/d/1p_RuwH4DVcRDvdRZQlzTypEtKMVVCs7F/view?usp=sharing",
+  resume: "https://drive.google.com/file/d/1qpWerVZF2ep_hqiGtikyDYR_BaZvMsXn/view?usp=sharing",
 };
