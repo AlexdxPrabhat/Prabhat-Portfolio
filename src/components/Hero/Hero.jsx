@@ -4,6 +4,7 @@ import { gsap, useGSAP, SplitText, ScrollTrigger, scrollToSection, prefersReduce
 import { profile } from "../../constants";
 import MagneticButton from "../ui/MagneticButton";
 import PortraitStage from "./PortraitStage";
+import Prologue from "./Prologue";
 
 const roles = ["enterprise workflows", "AI-powered apps", "3D multiplayer games", "full-stack platforms"];
 const proof = ["ServiceNow CSA certified", "2+ years at Accenture", "Quizly live on Google Play"];
@@ -38,15 +39,6 @@ const Hero = ({ ready }) => {
         loop.to(w, { yPercent: 0, duration: 0.8, ease: "expo.out" }).to(w, { yPercent: -110, duration: 0.6, ease: "expo.in" }, "+=1.6");
       });
 
-      // Gentle depth as the hero scrolls away (side-by-side layout only;
-      // on phones the copy sits below the avatar and is still being read)
-      gsap.matchMedia().add("(min-width: 1024px)", () => {
-        gsap
-          .timeline({ scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true } })
-          .to(".hero-copy", { yPercent: -10, autoAlpha: 0.2, ease: "none" }, 0)
-          .to(".hero-stage", { yPercent: 8, ease: "none" }, 0);
-      });
-
       ScrollTrigger.refresh();
     },
     { dependencies: [ready], scope: root }
@@ -54,6 +46,7 @@ const Hero = ({ ready }) => {
 
   return (
     <section id="home" ref={root} className="relative flex min-h-[100svh] items-center overflow-hidden pb-14 pt-24 md:pt-28">
+      <Prologue ready={ready} />
       {/* Faint grid and a soft glow behind the portrait */}
       <div
         aria-hidden="true"

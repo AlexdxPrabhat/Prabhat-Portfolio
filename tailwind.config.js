@@ -13,10 +13,12 @@ export default {
         line: "rgba(241, 239, 233, 0.1)",
         violet: { DEFAULT: "#8b5cf6", soft: "#a78bfa", deep: "#4c1d95" },
         lime: "#c4f542",
+        sunset: { pink: "#ff8fb8", orange: "#ffb067", rose: "#ff5f8f" },
       },
       fontFamily: {
         sans: ['"Inter Tight Variable"', "system-ui", "sans-serif"],
         serif: ['"Instrument Serif"', "Georgia", "serif"],
+        condensed: ['"Bebas Neue"', "Impact", "sans-serif"],
       },
       letterSpacing: {
         tightest: "-0.06em",

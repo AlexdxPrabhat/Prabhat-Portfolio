@@ -250,6 +250,7 @@ export const projects = [
   {
     id: 0,
     title: "Quizly",
+    palette: ["#1d4ed8", "#7c3aed"],
     year: "2026",
     featured: true,
     summary: "AI-powered quiz platform for Android, live on Google Play.",
@@ -266,6 +267,7 @@ export const projects = [
   {
     id: 1,
     title: "Uttarakhand Exam Prep",
+    palette: ["#c2410c", "#f59e0b"],
     year: "2026",
     featured: true,
     summary: "Hindi-first exam prep with 20,000+ previous-year questions and an AI tutor.",
@@ -281,6 +283,7 @@ export const projects = [
   {
     id: 2,
     title: "Rock Paper Scissors 3D",
+    palette: ["#3b0764", "#be185d"],
     year: "2026",
     featured: true,
     summary: "Real-time online duels in a fully 3D arena, built in Unity 6.",
@@ -295,6 +298,7 @@ export const projects = [
   {
     id: 3,
     title: "HouseHelp",
+    palette: ["#4c1d95", "#7a4dff"],
     year: "2026",
     featured: true,
     summary: "Customer and partner apps for booking house help in about 10 minutes.",
@@ -309,6 +313,7 @@ export const projects = [
   {
     id: 4,
     title: "UKD Youth Dehradun",
+    palette: ["#111827", "#9a3412"],
     year: "2026",
     featured: true,
     summary: "Server-rendered site and admin panel on Cloudflare Workers.",
