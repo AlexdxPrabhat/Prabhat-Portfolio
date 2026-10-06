@@ -63,17 +63,17 @@ const Prologue = ({ ready }) => {
         const ox = xP - mp.actualBoundingBoxLeft + fs * 0.1;
         const oy = base - fs * 0.36;
         const sky = ctx.createLinearGradient(0, 0, 0, h);
-        sky.addColorStop(0, "#0b0a18");
-        sky.addColorStop(0.55, "#170f2e");
-        sky.addColorStop(1, "#2a1336");
+        sky.addColorStop(0, "#07070a");
+        sky.addColorStop(0.6, "#100c1f");
+        sky.addColorStop(1, "#1a1235");
         const haze = ctx.createRadialGradient(w / 2, h * 1.05, 0, w / 2, h * 1.05, h * 0.75);
-        haze.addColorStop(0, "rgba(255,143,184,0.24)");
-        haze.addColorStop(1, "rgba(255,143,184,0)");
+        haze.addColorStop(0, "rgba(139,92,246,0.28)");
+        haze.addColorStop(1, "rgba(139,92,246,0)");
         const letters = ctx.createLinearGradient(xP, base - fs * 0.75, xP + total * 0.35, base);
-        letters.addColorStop(0, "#ff6fa8");
-        letters.addColorStop(0.45, "#ffb067");
-        letters.addColorStop(0.75, "#ff8fb8");
-        letters.addColorStop(1, "#8b5cf6");
+        letters.addColorStop(0, "#f1efe9");
+        letters.addColorStop(0.35, "#c4b5fd");
+        letters.addColorStop(0.75, "#8b5cf6");
+        letters.addColorStop(1, "#6d28d9");
         g = { w, h, dpr, fs, xP, xB, base, ox, oy, sky, haze, letters };
       };
 
@@ -103,7 +103,7 @@ const Prologue = ({ ready }) => {
         if (a > 0.005) {
           ctx.globalCompositeOperation = "source-over";
           ctx.globalAlpha = a;
-          ctx.shadowColor = "rgba(255,111,168,0.5)";
+          ctx.shadowColor = "rgba(139,92,246,0.55)";
           ctx.shadowBlur = 40;
           ctx.fillStyle = g.letters;
           ctx.fillText("P", g.xP, g.base);
@@ -192,8 +192,8 @@ const Prologue = ({ ready }) => {
 
       {/* Caption under the monogram */}
       <div className="pr-caption absolute inset-x-0 bottom-[7%] flex flex-col items-center gap-3 px-6 text-center">
-        <p className="font-condensed text-2xl tracking-[0.12em] text-paper md:text-3xl">Prabhat Bisht</p>
-        <p className="text-[11px] uppercase tracking-[0.3em] text-sunset-pink md:text-xs">ServiceNow Developer · Product Builder</p>
+        <p className="text-lg font-semibold uppercase tracking-[0.32em] text-paper md:text-xl">Prabhat Bisht</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-lime md:text-xs">ServiceNow Developer · Product Builder</p>
         <span className="mt-2 flex flex-col items-center gap-1 text-[10px] uppercase tracking-[0.3em] text-paper/50">
           Scroll to enter
           <FiChevronDown className="animate-bounce text-base motion-reduce:animate-none" />
