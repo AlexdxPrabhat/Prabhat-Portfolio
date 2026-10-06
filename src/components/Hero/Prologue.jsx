@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { gsap, useGSAP, ScrollTrigger, prefersReducedMotion } from "../../lib/motion";
 import { projects } from "../../constants";
@@ -15,7 +15,15 @@ const panels = [
   { left: 65, top: 72, w: 15, rot: 3, dx: 0.6, dy: 1.3 },
   { left: 81, top: 56, w: 17, rot: -6, dx: 1.3, dy: 0.7 },
 ];
+// Phones: four larger panels in the corners, clear of the letters and caption
+const phonePanels = [
+  { left: 4, top: 10, w: 40, rot: -5, dx: -1.2, dy: -1 },
+  { left: 56, top: 15, w: 40, rot: 4, dx: 1.2, dy: -1 },
+  { left: 4, top: 61, w: 40, rot: 4, dx: -1.2, dy: 1 },
+  { left: 56, top: 65, w: 40, rot: -4, dx: 1.2, dy: 1 },
+];
 const art = projects.slice(0, panels.length);
+const PHONE_QUERY = "(max-aspect-ratio: 4/5)";
 const FONT = '"Inter Tight Variable", "Inter Tight", system-ui, sans-serif';
 
 /**
@@ -32,6 +40,14 @@ const Prologue = ({ ready }) => {
   const canvasRef = useRef(null);
   const state = useRef({ scale: 1, fill: 1, enter: 0 });
   const drawRef = useRef(() => {});
+  const [phone, setPhone] = useState(() => window.matchMedia(PHONE_QUERY).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(PHONE_QUERY);
+    const on = () => setPhone(mq.matches);
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  const layout = phone ? phonePanels : panels;
 
   // Canvas + scroll-driven reveal (set up once)
   useGSAP(
@@ -126,7 +142,7 @@ const Prologue = ({ ready }) => {
         },
       });
       gsap.utils.toArray(".pr-panel").forEach((p, i) => {
-        const cfg = panels[i];
+        const cfg = (window.matchMedia(PHONE_QUERY).matches ? phonePanels : panels)[i];
         tl.to(p, { xPercent: cfg.dx * 160, yPercent: cfg.dy * 160, scale: 1.35, rotation: cfg.rot * 2, autoAlpha: 0, ease: "power2.in", duration: 0.45 }, 0);
       });
       tl.to(".pr-caption", { autoAlpha: 0, y: 40, duration: 0.2 }, 0)
@@ -144,7 +160,7 @@ const Prologue = ({ ready }) => {
         drawRef.current = () => {};
       };
     },
-    { scope: root }
+    { scope: root, dependencies: [phone], revertOnUpdate: true }
   );
 
   // Entrance after the loader: panels drop in, letters rise and glow, caption follows
@@ -163,17 +179,17 @@ const Prologue = ({ ready }) => {
   if (prefersReducedMotion()) return null;
 
   return (
-    <div ref={root} aria-hidden="true" className="pointer-events-none absolute inset-0 z-40 overflow-hidden">
+    <div ref={root} aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-40 h-[100svh] overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
       {/* Project collage */}
-      {art.map((p, i) => {
-        const c = panels[i];
+      {art.slice(0, layout.length).map((p, i) => {
+        const c = layout[i];
         return (
           <div
             key={p.id}
-            className={`pr-panel absolute ${i % 2 ? "hidden sm:block" : ""}`}
-            style={{ left: `${c.left}%`, top: `${c.top}%`, width: `max(${c.w}vw, 130px)`, rotate: `${c.rot}deg` }}
+            className="pr-panel absolute"
+            style={{ left: `${c.left}%`, top: `${c.top}%`, width: `${c.w}vw`, rotate: `${c.rot}deg` }}
           >
             <div className="pr-panel-inner overflow-hidden rounded-xl border border-paper/15 shadow-[0_24px_48px_-20px_rgba(0,0,0,0.9)]">
               <img src={p.image} alt="" className="aspect-[16/10] w-full object-cover" style={{ objectPosition: p.imagePosition }} />
@@ -184,8 +200,8 @@ const Prologue = ({ ready }) => {
 
       {/* Caption under the monogram */}
       <div className="pr-caption absolute inset-x-0 bottom-[7%] flex flex-col items-center gap-3 px-6 text-center">
-        <p className="text-lg font-semibold uppercase tracking-[0.32em] text-paper md:text-xl">Prabhat Bisht</p>
-        <p className="text-[11px] uppercase tracking-[0.3em] text-accent md:text-xs">ServiceNow Developer · Product Builder</p>
+        <p className="text-base font-semibold uppercase tracking-[0.24em] text-paper md:text-xl md:tracking-[0.32em]">Prabhat Bisht</p>
+        <p className="text-[10px] uppercase tracking-[0.18em] text-accent md:text-xs md:tracking-[0.3em]">ServiceNow Developer · Product Builder</p>
         <span className="mt-2 flex flex-col items-center gap-1 text-[10px] uppercase tracking-[0.3em] text-paper/50">
           Scroll to enter
           <FiChevronDown className="animate-bounce text-base motion-reduce:animate-none" />

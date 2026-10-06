@@ -14,7 +14,7 @@ const SectionHeading = ({ index, label, title, aside, className = "" }) => {
   );
 
   return (
-    <header ref={root} className={`mb-14 md:mb-20 ${className}`}>
+    <header ref={root} className={`mb-10 md:mb-20 ${className}`}>
       <p className="sh-eyebrow eyebrow invisible">
         <span className="tabular-nums">({String(index).padStart(2, "0")})</span> {label}
       </p>

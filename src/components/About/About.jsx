@@ -45,8 +45,8 @@ const About = () => {
       );
       gsap.fromTo(
         ".ab-photo img",
-        { yPercent: -8, scale: 1.2 },
-        { yPercent: 8, scale: 1.08, ease: "none", scrollTrigger: { trigger: ".ab-photo", start: "top bottom", end: "bottom top", scrub: true } }
+        { yPercent: -3, scale: 1.06 },
+        { yPercent: 3, scale: 1.06, ease: "none", scrollTrigger: { trigger: ".ab-photo", start: "top bottom", end: "bottom top", scrub: true } }
       );
 
       // Count-up numbers
@@ -76,12 +76,12 @@ const About = () => {
 
         <div className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
-            <figure className="ab-photo relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl bg-surface lg:max-w-none">
+            <figure className="ab-photo relative mx-auto aspect-[4/5] w-full max-w-[16rem] overflow-hidden rounded-3xl bg-surface sm:max-w-sm lg:mx-0 lg:max-w-none">
               <img
                 src={profileImage}
                 alt="Portrait of Prabhat Bisht"
                 loading="lazy"
-                className="h-full w-full object-cover object-[50%_20%] grayscale-[35%] transition-[filter] duration-700 hover:grayscale-0"
+                className="h-full w-full object-cover object-[50%_20%]"
               />
               <figcaption className="absolute inset-x-3 bottom-3 flex items-center justify-between rounded-full bg-ink/60 px-4 py-2 text-xs text-paper/80 backdrop-blur-md">
                 <span>{profile.name}</span>
@@ -120,7 +120,7 @@ const About = () => {
           </div>
         </div>
 
-        <dl className="stats mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line lg:mt-28 lg:grid-cols-4">
+        <dl className="stats mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-line bg-line lg:mt-28 lg:grid-cols-4">
           {stats.map((s) => (
             <div key={s.label} className="stat invisible flex flex-col-reverse justify-end bg-ink p-5 md:p-8">
               <dt className="mt-3 max-w-[16rem] text-sm text-muted">{s.label}</dt>

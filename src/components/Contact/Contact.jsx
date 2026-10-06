@@ -70,7 +70,7 @@ const Contact = () => {
           Let&apos;s build something <span className="font-serif font-normal italic text-accent">that works.</span>
         </h2>
 
-        <div className="ct-body mt-16 grid gap-16 lg:mt-24 lg:grid-cols-12">
+        <div className="ct-body mt-10 grid gap-12 lg:mt-24 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="ct-reveal invisible max-w-md text-lg leading-relaxed text-paper/70">
               Have a role, a project or an idea in mind? Drop a line and I&apos;ll get back to you.

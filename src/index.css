@@ -47,7 +47,7 @@
   }
 
   .section {
-    @apply relative py-24 md:py-36;
+    @apply relative py-16 md:py-36;
   }
 
   .eyebrow {

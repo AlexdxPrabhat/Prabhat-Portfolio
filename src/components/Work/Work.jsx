@@ -152,14 +152,14 @@ const Work = () => {
       </div>
 
       <div ref={pin} className="relative lg:flex lg:h-[100svh] lg:items-center lg:overflow-hidden">
-        <div ref={track} className="container-x flex flex-col gap-20 lg:w-max lg:max-w-none lg:flex-row lg:gap-16 lg:pr-[20vw]">
+        <div ref={track} className="container-x flex flex-col gap-14 lg:w-max lg:max-w-none lg:flex-row lg:gap-16 lg:pr-[20vw]">
           {featured.map((p, i) => (
             <ProjectCard key={p.id} project={p} index={i} onOpen={setOpen} />
           ))}
         </div>
       </div>
 
-      <div className="archive container-x pb-24 pt-24 md:pb-36 md:pt-32" onPointerMove={onArchiveMove}>
+      <div className="archive container-x pb-16 pt-16 md:pb-36 md:pt-32" onPointerMove={onArchiveMove}>
         <div className="flex items-end justify-between border-b border-line pb-6">
           <h3 className="text-2xl font-medium tracking-[-0.02em] md:text-3xl">More projects</h3>
           <span className="text-sm text-muted tabular-nums">({String(archive.length).padStart(2, "0")})</span>
