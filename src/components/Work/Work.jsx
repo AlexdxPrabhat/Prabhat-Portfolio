@@ -22,7 +22,7 @@ const ProjectCard = ({ project, index, onOpen }) => (
           {String(index + 1).padStart(2, "0")} / {String(featured.length).padStart(2, "0")}
         </span>
         <span className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-lime" />
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
           {project.status}
         </span>
       </div>
@@ -140,7 +140,7 @@ const Work = () => {
           label="Selected work"
           title={
             <>
-              Things I&apos;ve <span className="font-serif font-normal italic text-lime">built</span>
+              Things I&apos;ve <span className="font-serif font-normal italic text-accent">built</span>
             </>
           }
           aside={
@@ -175,7 +175,7 @@ const Work = () => {
                 data-cursor="Open"
                 className="group grid w-full grid-cols-[1fr_auto] items-center gap-4 py-6 text-left transition-[padding] duration-500 ease-expo md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)_minmax(0,1fr)_auto] md:py-8 md:hover:px-4"
               >
-                <span className="text-2xl font-medium tracking-[-0.02em] transition-colors group-hover:text-lime md:text-4xl">{p.title}</span>
+                <span className="text-2xl font-medium tracking-[-0.02em] transition-colors group-hover:text-accent md:text-4xl">{p.title}</span>
                 <span className="hidden text-paper/60 md:block">{p.summary}</span>
                 <span className="hidden text-sm text-muted md:block">{p.tags.slice(0, 3).join(" · ")}</span>
                 <span className="flex items-center gap-4 text-sm text-muted">

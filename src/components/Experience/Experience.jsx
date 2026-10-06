@@ -34,7 +34,7 @@ const Experience = () => {
           label="Experience"
           title={
             <>
-              Enterprise work, <span className="font-serif font-normal italic text-lime">shipped</span>
+              Enterprise work, <span className="font-serif font-normal italic text-accent">shipped</span>
             </>
           }
           aside="Two years delivering ServiceNow ITSM and CMDB solutions for a large-scale enterprise."
@@ -44,7 +44,7 @@ const Experience = () => {
           <article key={xp.id} className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
               <div className="xp-meta lg:sticky lg:top-28">
-                <p className="invisible text-sm uppercase tracking-[0.22em] text-lime">{xp.date}</p>
+                <p className="invisible text-sm uppercase tracking-[0.22em] text-accent">{xp.date}</p>
                 <h3 className="invisible mt-4 text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-5xl">{xp.role}</h3>
                 <div className="invisible mt-6 flex items-center gap-4">
                   <span className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-2xl bg-paper">

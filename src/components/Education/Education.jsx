@@ -33,7 +33,7 @@ const Education = () => {
           label="Education"
           title={
             <>
-              Always <span className="font-serif font-normal italic text-lime">learning</span>
+              Always <span className="font-serif font-normal italic text-accent">learning</span>
             </>
           }
         />
@@ -50,7 +50,7 @@ const Education = () => {
                     <span className="mt-2 block text-paper/60">{edu.school}</span>
                   </span>
                   <span className="edu-rise col-start-2 row-start-1 flex items-center justify-end gap-4 md:col-span-3 md:col-start-auto md:row-start-auto">
-                    <span className="rounded-full border border-line px-3 py-1 text-sm text-lime">{edu.grade}</span>
+                    <span className="rounded-full border border-line px-3 py-1 text-sm text-accent">{edu.grade}</span>
                     <span className="grid h-9 w-9 place-items-center rounded-full border border-line transition-transform duration-500 ease-expo group-open:rotate-45">
                       <FiPlus aria-hidden="true" />
                       <span className="sr-only">Toggle details</span>

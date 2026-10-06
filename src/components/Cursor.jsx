@@ -41,7 +41,7 @@ const Cursor = () => {
       current = interactive;
       if (labelled) {
         label.current.textContent = labelled.dataset.cursor;
-        gsap.to(ring.current, { width: 96, height: 96, backgroundColor: "#c4f542", borderColor: "#c4f542", duration: 0.45, ease: "expo.out" });
+        gsap.to(ring.current, { width: 96, height: 96, backgroundColor: "#62d84e", borderColor: "#62d84e", duration: 0.45, ease: "expo.out" });
         gsap.to(label.current, { autoAlpha: 1, scale: 1, duration: 0.3, delay: 0.05 });
         gsap.to(dot.current, { scale: 0, duration: 0.2 });
       } else if (interactive) {

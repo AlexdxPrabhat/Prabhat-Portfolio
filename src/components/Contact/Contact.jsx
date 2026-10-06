@@ -13,9 +13,9 @@ const fields = [
 ];
 
 const inputClass =
-  "peer w-full border-b border-line bg-transparent pb-3 pt-6 text-lg text-paper outline-none transition-colors placeholder-transparent focus:border-lime";
+  "peer w-full border-b border-line bg-transparent pb-3 pt-6 text-lg text-paper outline-none transition-colors placeholder-transparent focus:border-accent";
 const labelClass =
-  "pointer-events-none absolute left-0 top-6 text-lg text-muted transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-lime peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs";
+  "pointer-events-none absolute left-0 top-6 text-lg text-muted transition-all duration-300 peer-focus:top-0 peer-focus:text-xs peer-focus:text-accent peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs";
 
 const Contact = () => {
   const root = useRef(null);
@@ -62,13 +62,12 @@ const Contact = () => {
 
   return (
     <section id="contact" ref={root} className="section overflow-hidden">
-      <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/3 h-[60vw] w-[60vw] -translate-x-1/2 rounded-full bg-violet/10 blur-[120px]" />
       <div className="container-x relative">
         <p className="ct-eyebrow eyebrow invisible">
           <span className="tabular-nums">(07)</span> Contact
         </p>
         <h2 className="ct-title display invisible mt-6 text-[clamp(3.25rem,11vw,11rem)]">
-          Let&apos;s build something <span className="font-serif font-normal italic text-lime">that works.</span>
+          Let&apos;s build something <span className="font-serif font-normal italic text-accent">that works.</span>
         </h2>
 
         <div className="ct-body mt-16 grid gap-16 lg:mt-24 lg:grid-cols-12">
@@ -80,7 +79,7 @@ const Contact = () => {
               <MagneticButton
                 href={`mailto:${profile.email}`}
                 data-cursor="Write"
-                className="h-14 rounded-full bg-lime px-7 font-semibold text-ink"
+                className="h-14 rounded-full bg-accent px-7 font-semibold text-ink"
               >
                 {profile.email}
               </MagneticButton>
@@ -90,7 +89,7 @@ const Contact = () => {
                 aria-label="Copy email address"
                 className="grid h-14 w-14 place-items-center rounded-full border border-line transition-colors hover:border-paper/40"
               >
-                {copied ? <FiCheck aria-hidden="true" className="text-lime" /> : <FiCopy aria-hidden="true" />}
+                {copied ? <FiCheck aria-hidden="true" className="text-accent" /> : <FiCopy aria-hidden="true" />}
               </button>
             </div>
             <ul className="ct-reveal invisible mt-12 border-t border-line">

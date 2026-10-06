@@ -3,7 +3,7 @@ import { prefersReducedMotion } from "../../lib/motion";
 
 /**
  * Drifting node graph (think CMDB relationships): nearby nodes link up and
- * lime "packets" travel along the links. Nodes ease away from the pointer.
+ * green "packets" travel along the links. Nodes ease away from the pointer.
  * Sits behind the portrait, so the body naturally hides what passes behind it.
  */
 const NetworkField = ({ className = "" }) => {
@@ -101,7 +101,7 @@ const NetworkField = ({ className = "" }) => {
           const b = nodes[j];
           const dist = Math.hypot(a.x - b.x, a.y - b.y);
           if (dist < d) {
-            ctx.strokeStyle = `rgba(167,139,250,${(1 - dist / d) * 0.55})`;
+            ctx.strokeStyle = `rgba(238,238,234,${(1 - dist / d) * 0.28})`;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -110,7 +110,7 @@ const NetworkField = ({ className = "" }) => {
         }
       }
       for (const n of nodes) {
-        ctx.fillStyle = n.lime ? "rgba(196,245,66,0.95)" : "rgba(226,220,255,0.9)";
+        ctx.fillStyle = n.lime ? "rgba(98,216,78,0.95)" : "rgba(238,238,234,0.75)";
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
         ctx.fill();
@@ -122,8 +122,8 @@ const NetworkField = ({ className = "" }) => {
         const x = a.x + (b.x - a.x) * p.t;
         const y = a.y + (b.y - a.y) * p.t;
         const g = ctx.createRadialGradient(x, y, 0, x, y, 9);
-        g.addColorStop(0, "rgba(196,245,66,0.95)");
-        g.addColorStop(1, "rgba(196,245,66,0)");
+        g.addColorStop(0, "rgba(98,216,78,0.95)");
+        g.addColorStop(1, "rgba(98,216,78,0)");
         ctx.fillStyle = g;
         ctx.beginPath();
         ctx.arc(x, y, 9, 0, Math.PI * 2);

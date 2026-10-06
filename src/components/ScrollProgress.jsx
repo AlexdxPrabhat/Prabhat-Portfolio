@@ -15,7 +15,7 @@ const ScrollProgress = () => {
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-x-0 top-0 z-[80] h-[2px]">
-      <div ref={bar} className="h-full origin-left scale-x-0 bg-lime" />
+      <div ref={bar} className="h-full origin-left scale-x-0 bg-accent" />
     </div>
   );
 };

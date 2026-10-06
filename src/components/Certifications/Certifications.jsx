@@ -49,7 +49,7 @@ const Certifications = () => {
           label="Certifications"
           title={
             <>
-              Certified on the <span className="font-serif font-normal italic text-lime">platform</span>
+              Certified on the <span className="font-serif font-normal italic text-accent">platform</span>
             </>
           }
         />
@@ -61,7 +61,6 @@ const Certifications = () => {
             onPointerLeave={onLeave}
             className="cert-feature invisible relative overflow-hidden rounded-3xl border border-line bg-surface p-8 md:p-12 lg:col-span-7"
           >
-            <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-violet/20 blur-3xl" />
             <div className="relative flex flex-col gap-10 md:flex-row md:items-center">
               <div className="relative mx-auto shrink-0 [perspective:900px] md:mx-0">
                 <div className="cert-badge relative h-44 w-44 [transform-style:preserve-3d] md:h-56 md:w-56">
@@ -73,7 +72,7 @@ const Certifications = () => {
                 </div>
               </div>
               <div>
-                <p className="text-sm uppercase tracking-[0.22em] text-lime">
+                <p className="text-sm uppercase tracking-[0.22em] text-accent">
                   {featured.issuer} · {featured.date}
                 </p>
                 <h3 className="mt-4 text-3xl font-semibold leading-tight tracking-[-0.03em] md:text-4xl">{featured.title}</h3>
@@ -94,7 +93,7 @@ const Certifications = () => {
           <ul className="cert-rows flex flex-col gap-6 lg:col-span-5">
             {micro.map((c) => (
               <li key={c.id} className="cert-row invisible flex flex-1 items-center gap-5 rounded-3xl border border-line p-6 md:p-8">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-violet/15 text-violet-soft">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-paper/[0.06] text-accent">
                   <FiAward aria-hidden="true" className="text-xl" />
                 </span>
                 <div>

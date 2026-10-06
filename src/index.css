@@ -9,7 +9,7 @@
   }
 
   html {
-    background: #07070a;
+    background: #0c0c0c;
     -webkit-text-size-adjust: 100%;
     /* Locking scroll must not change the layout width */
     scrollbar-gutter: stable;
@@ -22,12 +22,12 @@
   }
 
   ::selection {
-    background: #c4f542;
-    color: #07070a;
+    background: #62d84e;
+    color: #0c0c0c;
   }
 
   :focus-visible {
-    outline: 2px solid #c4f542;
+    outline: 2px solid #62d84e;
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -130,7 +130,7 @@
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.4s;
-  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(139, 92, 246, 0.16), transparent 60%);
+  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(238, 238, 234, 0.06), transparent 60%);
 }
 
 .spotlight:hover::before {
@@ -156,7 +156,7 @@
 
 /* react-toastify, restyled to match */
 .Toastify__toast {
-  background: #16151d !important;
+  background: #1b1b1b !important;
   color: #f1efe9 !important;
   border: 1px solid rgba(241, 239, 233, 0.1);
   border-radius: 14px !important;
@@ -183,7 +183,7 @@
 
 /* Slim dark scrollbar to match the page */
 html {
-  scrollbar-color: #2c2b35 #07070a;
+  scrollbar-color: #2e2e2c #0c0c0c;
   scrollbar-width: thin;
 }
 
@@ -192,12 +192,12 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #07070a;
+  background: #0c0c0c;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2c2b35;
-  border: 3px solid #07070a;
+  background: #2e2e2c;
+  border: 3px solid #0c0c0c;
   border-radius: 999px;
 }
 

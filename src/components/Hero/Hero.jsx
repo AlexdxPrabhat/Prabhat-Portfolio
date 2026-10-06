@@ -52,21 +52,20 @@ const Hero = ({ ready }) => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(241,239,233,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,239,233,0.045)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_75%_65%_at_60%_40%,#000_35%,transparent_100%)]"
       />
-      <div aria-hidden="true" className="pointer-events-none absolute right-[-8%] top-[8%] h-[75vmin] w-[75vmin] rounded-full bg-violet/20 blur-[130px]" />
 
       <div className="container-x relative z-10 grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="hero-copy order-2 lg:order-1 lg:col-span-7">
           <p className="hero-fade invisible flex items-center gap-2.5 text-[11px] uppercase tracking-[0.22em] text-paper/70 md:text-xs">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime opacity-60 motion-reduce:animate-none" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-lime" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
             ServiceNow Developer at Accenture
           </p>
 
           <p className="hero-fade invisible mt-6 text-2xl text-paper/60 md:mt-8 md:text-3xl">Hi, I&apos;m</p>
           <h1 className="hero-title display invisible mt-2 text-[clamp(3.25rem,8.5vw,8rem)]">
-            Prabhat Bisht<span className="text-lime">.</span>
+            Prabhat Bisht<span className="text-accent">.</span>
           </h1>
 
           <p className="hero-fade invisible mt-6 text-xl leading-snug md:mt-8 md:text-3xl">
@@ -76,7 +75,7 @@ const Hero = ({ ready }) => {
                 <span
                   key={r}
                   aria-hidden={i > 0 ? "true" : undefined}
-                  className="role-word col-start-1 row-start-1 whitespace-nowrap font-serif italic text-lime"
+                  className="role-word col-start-1 row-start-1 whitespace-nowrap font-serif italic text-accent"
                 >
                   {r}
                 </span>
@@ -107,7 +106,7 @@ const Hero = ({ ready }) => {
           <ul className="hero-fade invisible mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-paper/55">
             {proof.map((p) => (
               <li key={p} className="flex items-center gap-2">
-                <span className="h-1 w-1 rounded-full bg-lime" />
+                <span className="h-1 w-1 rounded-full bg-accent" />
                 {p}
               </li>
             ))}

@@ -110,7 +110,7 @@ const ProjectModal = ({ project, onClose }) => {
                     href={project.webapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center justify-between rounded-full bg-lime px-6 py-4 font-semibold text-ink"
+                    className="group inline-flex items-center justify-between rounded-full bg-accent px-6 py-4 font-semibold text-ink"
                   >
                     {project.webappLabel || "View live"}
                     <FiArrowUpRight aria-hidden="true" className="transition-transform duration-500 ease-expo group-hover:rotate-45" />

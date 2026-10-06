@@ -4,15 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#07070a",
-        surface: "#0f0e14",
-        raised: "#16151d",
-        paper: "#f1efe9",
-        muted: "#8f8d99",
-        dim: "#4a4954",
-        line: "rgba(241, 239, 233, 0.1)",
-        violet: { DEFAULT: "#8b5cf6", soft: "#a78bfa", deep: "#4c1d95" },
-        lime: "#c4f542",
+        ink: "#0c0c0c",
+        surface: "#141414",
+        raised: "#1b1b1b",
+        paper: "#eeeeea",
+        muted: "#8f8f8a",
+        dim: "#4a4a47",
+        line: "rgba(238, 238, 234, 0.1)",
+        // The only accent: ServiceNow's brand green, used sparingly
+        accent: "#62d84e",
       },
       fontFamily: {
         sans: ['"Inter Tight Variable"', "system-ui", "sans-serif"],

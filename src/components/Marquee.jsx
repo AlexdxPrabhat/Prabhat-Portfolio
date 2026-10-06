@@ -9,7 +9,7 @@ const Row = ({ words, outline }) => (
         {words.map((w) => (
           <span key={w} className="flex items-center">
             <span className={`display px-6 text-[clamp(2.5rem,7vw,6.5rem)] md:px-10 ${outline ? "text-outline" : ""}`}>{w}</span>
-            <span className="text-[clamp(1.25rem,3vw,2.5rem)] text-lime">✦</span>
+            <span className="text-[clamp(1.25rem,3vw,2.5rem)] text-accent">✦</span>
           </span>
         ))}
       </div>

@@ -34,7 +34,7 @@ const Skills = () => {
           label="Skills"
           title={
             <>
-              The <span className="font-serif font-normal italic text-lime">toolkit</span>
+              The <span className="font-serif font-normal italic text-accent">toolkit</span>
             </>
           }
           aside="From enterprise platforms to native apps, game engines and edge runtimes."

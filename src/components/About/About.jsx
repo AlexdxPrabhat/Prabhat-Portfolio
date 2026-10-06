@@ -93,8 +93,8 @@ const About = () => {
           <div className="lg:col-span-8">
             <p className="ab-statement invisible text-[clamp(1.75rem,4.2vw,3.75rem)] font-medium leading-[1.08] tracking-[-0.03em]">
               I build enterprise workflows at Accenture{" "}
-              <span className="font-serif font-normal italic text-lime">by day</span> and ship my own products{" "}
-              <span className="font-serif font-normal italic text-lime">by night</span>: AI-powered apps, a 3D multiplayer
+              <span className="font-serif font-normal italic text-accent">by day</span> and ship my own products{" "}
+              <span className="font-serif font-normal italic text-accent">by night</span>: AI-powered apps, a 3D multiplayer
               game and full-stack platforms on Firebase and Cloudflare.
             </p>
 
@@ -129,7 +129,7 @@ const About = () => {
                 <span className="stat-num tabular-nums" data-value={s.value}>
                   {s.value.toLocaleString("en-US")}
                 </span>
-                <span className="text-lime">{s.suffix}</span>
+                <span className="text-accent">{s.suffix}</span>
               </dd>
             </div>
           ))}

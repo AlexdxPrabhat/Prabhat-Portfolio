@@ -64,7 +64,7 @@ const Loader = ({ onReveal, onDone }) => {
         </span>
       </div>
       <div className="absolute inset-x-0 bottom-0 h-[2px] bg-line">
-        <div className="ld-bar h-full origin-left scale-x-0 bg-lime" />
+        <div className="ld-bar h-full origin-left scale-x-0 bg-accent" />
       </div>
     </div>
   );

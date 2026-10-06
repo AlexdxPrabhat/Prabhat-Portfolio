@@ -22,7 +22,7 @@ const logos = [
 const Card = ({ className = "", depth, children }) => (
   <div
     data-depth={depth}
-    className={`ps-card ps-layer invisible absolute z-30 flex items-center gap-2 rounded-xl border border-paper/10 bg-[#110d1d]/95 px-2 py-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] sm:gap-3 sm:rounded-2xl sm:px-3 sm:py-2.5 ${className}`}
+    className={`ps-card ps-layer invisible absolute z-30 flex items-center gap-2 rounded-xl border border-paper/10 bg-[#161616]/95 px-2 py-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] sm:gap-3 sm:rounded-2xl sm:px-3 sm:py-2.5 ${className}`}
   >
     {children}
   </div>
@@ -136,9 +136,8 @@ const PortraitStage = ({ ready }) => {
         data-depth="0.15"
         className="ps-beams ps-anim ps-layer invisible absolute inset-[-10%] overflow-hidden [mask-image:radial-gradient(ellipse_at_50%_45%,#000_30%,transparent_72%)]"
       >
-        <div className="absolute left-[10%] top-[-20%] h-[140%] w-[22%] rotate-[18deg] animate-[beam_9s_ease-in-out_infinite] bg-gradient-to-b from-transparent via-violet/40 to-transparent blur-2xl motion-reduce:animate-none" />
-        <div className="absolute left-[55%] top-[-20%] h-[140%] w-[14%] rotate-[18deg] animate-[beam_12s_ease-in-out_-4s_infinite] bg-gradient-to-b from-transparent via-[#7c6cff]/30 to-transparent blur-2xl motion-reduce:animate-none" />
-        <div className="absolute left-[15%] top-[8%] aspect-square w-[70%] rounded-full bg-violet/25 blur-[90px]" />
+        <div className="absolute left-[10%] top-[-20%] h-[140%] w-[22%] rotate-[18deg] animate-[beam_9s_ease-in-out_infinite] bg-gradient-to-b from-transparent via-white/[0.07] to-transparent blur-2xl motion-reduce:animate-none" />
+        <div className="absolute left-[55%] top-[-20%] h-[140%] w-[14%] rotate-[18deg] animate-[beam_12s_ease-in-out_-4s_infinite] bg-gradient-to-b from-transparent via-white/[0.05] to-transparent blur-2xl motion-reduce:animate-none" />
       </div>
 
       {/* Live network graph */}
@@ -167,26 +166,26 @@ const PortraitStage = ({ ready }) => {
       >
         <defs>
           <linearGradient id="ps-neon" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#c4f542" />
-            <stop offset="0.5" stopColor="#e9ffb0" />
-            <stop offset="1" stopColor="#a78bfa" />
+            <stop offset="0" stopColor="#62d84e" />
+            <stop offset="0.5" stopColor="#d6f5cf" />
+            <stop offset="1" stopColor="#ffffff" />
           </linearGradient>
           <filter id="ps-glow" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="6" />
           </filter>
         </defs>
-        <path className="ps-outer ps-march" d={SILHOUETTE_OUTER} pathLength="1000" fill="none" stroke="rgba(167,139,250,0.45)" strokeWidth="1.2" strokeDasharray="3 9" vectorEffect="non-scaling-stroke" />
+        <path className="ps-outer ps-march" d={SILHOUETTE_OUTER} pathLength="1000" fill="none" stroke="rgba(238,238,234,0.3)" strokeWidth="1.2" strokeDasharray="3 9" vectorEffect="non-scaling-stroke" />
         <path className="ps-trace" d={SILHOUETTE_INNER} pathLength="1000" fill="none" stroke="rgba(241,239,233,0.22)" strokeWidth="1.2" strokeDasharray="1000" vectorEffect="non-scaling-stroke" />
-        <path className="ps-comet ps-comet-a" d={SILHOUETTE_INNER} pathLength="1000" fill="none" stroke="#c4f542" strokeWidth="14" strokeLinecap="round" strokeDasharray="160 2000" strokeDashoffset="160" filter="url(#ps-glow)" opacity="0.7" />
+        <path className="ps-comet ps-comet-a" d={SILHOUETTE_INNER} pathLength="1000" fill="none" stroke="#62d84e" strokeWidth="14" strokeLinecap="round" strokeDasharray="160 2000" strokeDashoffset="160" filter="url(#ps-glow)" opacity="0.7" />
         <path className="ps-comet ps-comet-a" d={SILHOUETTE_INNER} pathLength="1000" fill="none" stroke="url(#ps-neon)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="160 2000" strokeDashoffset="160" vectorEffect="non-scaling-stroke" />
-        <path className="ps-comet ps-comet-b" d={SILHOUETTE_INNER} pathLength="1000" fill="none" stroke="#a78bfa" strokeWidth="12" strokeLinecap="round" strokeDasharray="90 2000" strokeDashoffset="-1000" filter="url(#ps-glow)" opacity="0.6" />
-        <path className="ps-comet ps-comet-b" d={SILHOUETTE_INNER} pathLength="1000" fill="none" stroke="#d6c9ff" strokeWidth="2" strokeLinecap="round" strokeDasharray="90 2000" strokeDashoffset="-1000" vectorEffect="non-scaling-stroke" />
+        <path className="ps-comet ps-comet-b" d={SILHOUETTE_INNER} pathLength="1000" fill="none" stroke="#ffffff" strokeWidth="12" strokeLinecap="round" strokeDasharray="90 2000" strokeDashoffset="-1000" filter="url(#ps-glow)" opacity="0.6" />
+        <path className="ps-comet ps-comet-b" d={SILHOUETTE_INNER} pathLength="1000" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeDasharray="90 2000" strokeDashoffset="-1000" vectorEffect="non-scaling-stroke" />
       </svg>
 
       {/* Floating tech logos */}
       {logos.map((l) => (
         <div key={l.alt} data-depth={l.depth} className={`ps-layer absolute z-20 ${l.pos}`}>
-          <span className="ps-logo invisible grid h-10 w-10 place-items-center rounded-2xl border border-paper/15 bg-[#110d1d]/95 shadow-[0_10px_30px_-10px_rgba(139,92,246,0.6)] md:h-12 md:w-12">
+          <span className="ps-logo invisible grid h-10 w-10 place-items-center rounded-2xl border border-paper/15 bg-[#161616]/95 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.7)] md:h-12 md:w-12">
             <img src={l.src} alt="" className="h-5 w-5 object-contain md:h-6 md:w-6" />
           </span>
         </div>
@@ -201,7 +200,7 @@ const PortraitStage = ({ ready }) => {
         </span>
       </Card>
       <Card depth="1.2" className="bottom-[3%] right-[-3%] sm:bottom-auto sm:right-[-10%] sm:top-[56%]">
-        <span className="grid h-7 w-7 place-items-center rounded-lg bg-lime text-xs font-bold text-ink sm:h-9 sm:w-9 sm:rounded-xl sm:text-[13px]">Q</span>
+        <span className="grid h-7 w-7 place-items-center rounded-lg bg-accent text-xs font-bold text-ink sm:h-9 sm:w-9 sm:rounded-xl sm:text-[13px]">Q</span>
         <span className="leading-tight">
           <span className="block text-[11px] font-semibold sm:text-[13px]">Quizly</span>
           <span className="block text-[10px] text-paper/60 sm:text-[11px]">Live on Google Play</span>
@@ -209,8 +208,8 @@ const PortraitStage = ({ ready }) => {
       </Card>
       <Card depth="0.9" className="bottom-[6%] left-[2%] hidden sm:flex">
         <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime opacity-60 motion-reduce:animate-none" />
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-lime" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
         </span>
         <span className="text-[13px] font-medium">2+ yrs at Accenture</span>
       </Card>

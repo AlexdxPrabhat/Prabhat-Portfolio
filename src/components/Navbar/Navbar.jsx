@@ -179,7 +179,7 @@ const Navbar = ({ ready }) => {
                 className="menu-item display flex items-baseline gap-4 text-[clamp(3rem,14vw,6rem)]"
               >
                 <span className="text-sm font-normal tracking-normal text-muted tabular-nums">0{i + 1}</span>
-                <span className={active === id ? "font-serif font-normal italic text-lime" : ""}>{label}</span>
+                <span className={active === id ? "font-serif font-normal italic text-accent" : ""}>{label}</span>
               </button>
             </li>
           ))}
