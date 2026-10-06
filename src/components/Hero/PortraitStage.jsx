@@ -22,7 +22,7 @@ const logos = [
 const Card = ({ className = "", depth, children }) => (
   <div
     data-depth={depth}
-    className={`ps-card ps-layer invisible absolute z-30 flex items-center gap-2 rounded-xl border border-paper/10 bg-ink/75 px-2 py-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl sm:gap-3 sm:rounded-2xl sm:px-3 sm:py-2.5 ${className}`}
+    className={`ps-card ps-layer invisible absolute z-30 flex items-center gap-2 rounded-xl border border-paper/10 bg-[#110d1d]/95 px-2 py-1.5 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] sm:gap-3 sm:rounded-2xl sm:px-3 sm:py-2.5 ${className}`}
   >
     {children}
   </div>
@@ -52,39 +52,50 @@ const PortraitStage = ({ ready }) => {
         .timeline({ defaults: { ease: "expo.out" } })
         .fromTo(".ps-beams", { autoAlpha: 0 }, { autoAlpha: 1, duration: 2 }, 0)
         .fromTo(".ps-network", { autoAlpha: 0 }, { autoAlpha: 1, duration: 2 }, 0.2)
-        .fromTo(".ps-person", { autoAlpha: 0, yPercent: 10, filter: "blur(12px)" }, { autoAlpha: 1, yPercent: 0, filter: "blur(0px)", duration: 1.6 }, 0.3)
+        .fromTo(".ps-person", { autoAlpha: 0, yPercent: 10, filter: "blur(12px)" }, { autoAlpha: 1, yPercent: 0, filter: "blur(0px)", duration: 1.6, clearProps: "filter" }, 0.3)
         .set(".ps-outline", { autoAlpha: 1 }, 0.6)
         .fromTo(".ps-trace", { strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 2.2, ease: "power3.inOut" }, 0.6)
         .fromTo(".ps-outer", { opacity: 0 }, { opacity: 1, duration: 1.6, ease: "power2.out" }, 1.4)
         .fromTo(".ps-logo", { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: 0.8, stagger: 0.08, ease: "back.out(2)" }, 1.3)
         .fromTo(".ps-card", { autoAlpha: 0, y: 24, scale: 0.85 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1, stagger: 0.14, ease: "back.out(1.6)" }, 1.4);
 
+      // Endless motion is collected so it can sleep while the hero is off screen
+      const loops = [];
       // Two comets of light travelling the silhouette in opposite directions
-      gsap.fromTo(
+      loops.push(gsap.fromTo(
         ".ps-comet-a",
         { strokeDashoffset: 160 },
         { strokeDashoffset: -1000, duration: 4.5, ease: "power1.inOut", repeat: -1, repeatDelay: 0.4, delay: 2.4 }
-      );
-      gsap.fromTo(
+      ));
+      loops.push(gsap.fromTo(
         ".ps-comet-b",
         { strokeDashoffset: -1000 },
         { strokeDashoffset: 160, duration: 6, ease: "power1.inOut", repeat: -1, repeatDelay: 1.2, delay: 4 }
-      );
+      ));
       // The outer dashed outline slowly marches (starts after it has drawn in)
       const march = gsap.fromTo(".ps-march", { strokeDashoffset: 0 }, { strokeDashoffset: -200, duration: 12, ease: "none", repeat: -1, delay: 2.8 });
+      loops.push(march);
 
       // Logos and cards drift gently
       gsap.utils.toArray(".ps-logo").forEach((el, i) => {
-        gsap.to(el, { y: i % 2 ? 9 : -9, rotation: i % 2 ? 6 : -6, duration: 3 + i * 0.35, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 2 });
+        loops.push(gsap.to(el, { y: i % 2 ? 9 : -9, rotation: i % 2 ? 6 : -6, duration: 3 + i * 0.35, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 2 }));
       });
       gsap.utils.toArray(".ps-card").forEach((card, i) => {
-        gsap.to(card, { y: i % 2 ? 10 : -10, duration: 2.6 + i * 0.4, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 2 + i * 0.3 });
+        loops.push(gsap.to(card, { y: i % 2 ? 10 : -10, duration: 2.6 + i * 0.4, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 2 + i * 0.3 }));
       });
 
-      // Scrolling quickens the outline for a moment
       ScrollTrigger.create({
-        start: 0,
-        end: "max",
+        trigger: root.current,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: (self) => loops.forEach((t) => (self.isActive ? t.resume() : t.pause())),
+      });
+
+      // Scrolling quickens the outline for a moment (only while it's visible)
+      ScrollTrigger.create({
+        trigger: root.current,
+        start: "top bottom",
+        end: "bottom top",
         onUpdate(self) {
           const boost = 1 + Math.min(Math.abs(self.getVelocity()) / 400, 5);
           gsap.to(march, { timeScale: boost, duration: 0.2, overwrite: true });
@@ -175,7 +186,7 @@ const PortraitStage = ({ ready }) => {
       {/* Floating tech logos */}
       {logos.map((l) => (
         <div key={l.alt} data-depth={l.depth} className={`ps-layer absolute z-20 ${l.pos}`}>
-          <span className="ps-logo invisible grid h-10 w-10 place-items-center rounded-2xl border border-paper/15 bg-ink/70 shadow-[0_10px_30px_-10px_rgba(139,92,246,0.6)] backdrop-blur-md md:h-12 md:w-12">
+          <span className="ps-logo invisible grid h-10 w-10 place-items-center rounded-2xl border border-paper/15 bg-[#110d1d]/95 shadow-[0_10px_30px_-10px_rgba(139,92,246,0.6)] md:h-12 md:w-12">
             <img src={l.src} alt="" className="h-5 w-5 object-contain md:h-6 md:w-6" />
           </span>
         </div>
