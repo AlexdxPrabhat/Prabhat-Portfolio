@@ -53,7 +53,6 @@ import servicenowCsa from "./assets/cert_logo/servicenow_csa.png";
 // Education Section Logo's
 import graphicEraDeemed from "./assets/education_logo/graphic_era_official_logo.jpg";
 import graphicEraHill from "./assets/education_logo/graphicerahilluniversity_logo.jpg";
-import sgrrPP from "./assets/education_logo/sgrrPP.png";
 
 // Project Section Logo's
 import quizly from "./assets/work_logo/quizly.webp";
@@ -223,24 +222,6 @@ export const education = [
     grade: "7.56 CGPA",
     desc: "I completed my Bachelor's degree (BCA) in Computer Applications from Graphic Era Hill University, Dehradun. During this program, I built a solid foundation in programming, data structures, algorithms, database systems, web development, and software engineering. I actively participated in coding competitions, technical events, and hands-on projects that helped me apply theoretical knowledge to practical challenges.",
     degree: "Bachelor of Computer Applications - BCA",
-  },
-  {
-    id: 2,
-    img: sgrrPP,
-    school: "Sri Guru Ram Rai Public School Patelnagar",
-    date: "Apr 2020 - March 2021",
-    grade: "66.6%",
-    desc: "I completed my Class 12 education (Commerce with Information Practices) from SGRR Public School, Patel Nagar, Dehradun. This phase allowed me to gain knowledge in business studies, accountancy, and core computing concepts through Information Practices, further igniting my interest in technology and software development.",
-    degree: "CBSE(XII) - Commerce with Computer Science",
-  },
-  {
-    id: 3,
-    img: sgrrPP,
-    school: "Sri Guru Ram Rai Public School Patelnagar",
-    date: "Apr 2018 - March 2019",
-    grade: "67%",
-    desc: "I completed my Class 10 education from SGRR Public School, Patel Nagar, Dehradun. This stage helped me build a strong academic foundation, especially in mathematics and science, setting the base for my interest in computer science and technology.",
-    degree: "CBSE(X), Science with Computer Application",
   },
 ];
 
